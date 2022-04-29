@@ -4,13 +4,81 @@
         <meta charset='utf-8'>
         <meta name='viewport'
               content='width=device-width, initial-scale=1.1, maximum-scale=1.0'>
-        <title>Document</title>
-        <meta name='description' content=''>
+        <title>Brutalist Library</title>
+        <meta name='description' content='A Brutalist Inspired Library'>
         <link rel='stylesheet' href='reset.css'>
         <link rel='stylesheet' href='style.css'>
     </head>
     <body>
         
+        <main>
+            <section class='stats'>
+                <!-- stats bar -->
+                <div>Total Books:</div>
+                <div>Books Read:</div>
+                <div>Pages Read:</div>
+            </section>
+    
+            <section class='content'>
+                <!-- library content -->
+                <section class='filter'>
+                    <!-- filter library by sort/view -->
+                    <div class='sort'>
+                        Sort By:
+                        <select>
+                            <option>Title</option>
+                            <option>Author</option>
+                        </select>
+                    </div>
+                    <div class='view'>
+                        View:
+                        <input type='radio' checked>all</input>
+                        <input type='radio'>unread</input>
+                        <input type='radio'>reading</input>
+                        <input type='radio'>read</input>
+                    </div>
+                </section>
+                
+                <section class='table'>
+                    <!-- library table -->
+                    <table>
+                        flesh this out later with proper element designations
+                        <tr>
+                            <td>Title</td>
+                            <td>Author</td>
+                            <td>Pages</td>
+                            <td>Status</td>
+                        </tr>
+                        <tr>
+                            <td>Book 1</td>
+                            <td>Person 1</td>
+                            <td>1</td>
+                            <td>unread</td>
+                        </tr>
+                        <tr>
+                            <td>Book 2</td>
+                            <td>Person 2</td>
+                            <td>2</td>
+                            <td>reading</td>
+                        </tr>
+                        <tr>
+                            <td>Book 3</td>
+                            <td>Person 3</td>
+                            <td>3</td>
+                            <td>read</td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+    
+            <section class='del-add'>
+                <!-- delete/add books -->
+                <button>delete</button>
+                <button>add</button>
+            </section>
+        </main>
+        
+
         <script src='script.js' async></script>
     </body>
 </html>
