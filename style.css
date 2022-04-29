@@ -1,4 +1,56 @@
 body {
     background-color: black;
     color: lightgray;
+
+    min-height: 100vh;
+
+    --padding: 20px;
+}
+
+.stats,
+.content,
+.del-add {
+    border: 1px solid blue;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    padding: var(--padding);
+}
+
+.content {
+    padding: var(--padding);
+}
+
+    .filter,
+    .table {
+        border: 1px solid green;
+    }
+
+    .filter {
+        display: flex;
+        justify-content: space-around;
+        align-content: center;
+    }
+
+    .table {
+        padding-top: var(--padding);
+    }
+
+        table {
+            width: 100%;
+        }
+        
+            td {
+                text-align: center;
+
+                border: 1px solid orange;
+            }
+
+.del-add {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
 }
