@@ -1,56 +1,69 @@
+:root {
+    --full-space: 50px;
+    --half-space: calc(var(--full-space) / 2);
+    --two-space: calc(var(--full-space) * 2);
+}
+
 body {
-    background-color: black;
-    color: lightgray;
-
     min-height: 100vh;
-
-    --padding: 20px;
 }
 
-.stats,
-.content,
-.del-add {
-    border: 1px solid blue;
+main {
+    padding: var(--full-space) var(--half-space);
 }
 
-.stats {
-    display: flex;
-    justify-content: space-around;
-    align-content: center;
-    padding: var(--padding);
+/* MOBILE/TABLET LAYOUT */
+@media only screen and (min-width: 1101px) {
+    main {
+        display: grid;
+        grid-template-rows: max-content / 1fr / max content;
+        grid-template-areas: 'title'
+                             'content'
+                             'del-add';
+    }
 }
 
-.content {
-    padding: var(--padding);
-}
+    header {
+        grid-area: title;
 
-    .filter,
-    .table {
-        border: 1px solid green;
+        padding-bottom: var(--full-space);
     }
 
-    .filter {
+    .content {
+        grid-area: content;
+    }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            align-content: center;
+
+            padding-bottom: var(--full-space);
+        }
+
+        .filter-table {
+            display: flex;
+            flex-flow: column;
+
+            gap: var(--half-space);
+        }
+
+            .filter {
+                display: flex;
+                justify-content: space-around;
+                align-content: center;
+            }
+
+            table {
+                width: 100%;
+            }
+
+    .del-add {
+        grid-area: del-add;
+
         display: flex;
         justify-content: space-around;
         align-content: center;
+
+        padding: var(--half-space);
     }
-
-    .table {
-        padding-top: var(--padding);
-    }
-
-        table {
-            width: 100%;
-        }
-        
-            td {
-                text-align: center;
-
-                border: 1px solid orange;
-            }
-
-.del-add {
-    display: flex;
-    justify-content: space-around;
-    align-content: center;
-}
