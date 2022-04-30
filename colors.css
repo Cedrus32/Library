@@ -1,0 +1,14 @@
+:root {
+    --light: #E0E0E0;
+    --dark: #212121;
+    --accent: #0433FF;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+    header {
+        color: var(--accent);
+    }
