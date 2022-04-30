@@ -53,30 +53,44 @@
                     <!-- library table -->
                     <table>
                         <!-- flesh this out later with proper element designations -->
-                        <tr>
-                            <td>Title</td>
-                            <td>Author</td>
-                            <td>Pages</td>
-                            <td>Status</td>
-                        </tr>
-                        <tr>
-                            <td>Book 1</td>
-                            <td>Person 1</td>
-                            <td>1</td>
-                            <td>unread</td>
-                        </tr>
-                        <tr>
-                            <td>Book 2</td>
-                            <td>Person 2</td>
-                            <td>2</td>
-                            <td>reading</td>
-                        </tr>
-                        <tr>
-                            <td>Book 3</td>
-                            <td>Person 3</td>
-                            <td>3</td>
-                            <td>read</td>
-                        </tr>
+                        <caption>Your Books</caption>
+                        <colgroup>
+                            <col id='title'>
+                            <col id='author'>
+                            <col id='pages'>
+                            <col id='status'>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope='col'>Title</th>
+                                <th scope='col'>Author</th>
+                                <th scope='col'>Pages</th>
+                                <th scope='col'>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- <th scope='row'>Book 1</th> -->
+                                <th span='row'>Book 1</th>
+                                <td>Person 1</td>
+                                <td>1</td>
+                                <td>unread</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 2</th> -->
+                                <th span='row'>Book 2</th>
+                                <td>Person 2</td>
+                                <td>2</td>
+                                <td>reading</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 3</th> -->
+                                <th span='row'>Book 3</th>
+                                <td>Person 3</td>
+                                <td>3</td>
+                                <td>read</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </section>
             </section>
