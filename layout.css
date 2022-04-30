@@ -2,6 +2,7 @@
     --full-space: 50px;
     --half-space: calc(var(--full-space) / 2);
     --two-space: calc(var(--full-space) * 2);
+    --qrt-space: calc(var(--full-space) / 4);
 }
 
 body {
@@ -12,7 +13,7 @@ main {
     padding: var(--full-space) var(--half-space);
 }
 
-/* MOBILE/TABLET LAYOUT */
+/* MAIN MOBILE/TABLET LAYOUT */
 @media only screen and (min-width: 1101px) {
     main {
         display: grid;
@@ -26,11 +27,14 @@ main {
     header {
         grid-area: title;
 
-        padding-bottom: var(--full-space);
+        margin-bottom: var(--full-space);
     }
 
     .content {
         grid-area: content;
+
+        display: flex;
+        flex-flow: column;
     }
 
         .stats {
@@ -38,24 +42,33 @@ main {
             justify-content: space-around;
             align-content: center;
 
-            padding-bottom: var(--full-space);
+            margin-bottom: var(--full-space);
         }
 
-        .filter-table {
+        .filter {
             display: flex;
-            flex-flow: column;
+            justify-content: space-around;
+            align-content: center;
 
-            gap: var(--half-space);
+            margin-bottom: var(--half-space);
         }
 
-            .filter {
-                display: flex;
-                justify-content: space-around;
-                align-content: center;
+        table {
+            width: 100%;
+        }
+
+            /* table header bottom space */
+            table th {
+                height: calc(1em + var(--half-space));
             }
 
-            table {
-                width: 100%;
+            /* table body separator & space */
+            table td {
+                border-top: 1px solid black;
+            }
+
+            tbody tr {
+                height: calc(1em + var(--half-space));
             }
 
     .del-add {
