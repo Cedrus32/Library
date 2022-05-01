@@ -2,6 +2,8 @@
     --light: #E0E0E0;
     --dark: #212121;
     --accent: #0433FF;
+
+    --thick: 4px;
 }
 
 body {
@@ -11,4 +13,14 @@ body {
 
     header {
         color: var(--accent);
+    }
+
+    .stats {
+        border-top: var(--thick) solid var(--dark);
+        border-bottom: var(--thick) solid var(--dark);
+    }
+
+    /* table body separator & space */
+    table td {
+        border-top: 1px solid black;
     }
