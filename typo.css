@@ -17,6 +17,11 @@ body {
         font-size: 2.25rem;
     }
 
+    .sort button {
+        font-family: 'Poppins', serif;
+        font-size: 0.9rem;
+    }
+
     .th-col {
         font-size: 1.15rem;
         letter-spacing: 0.05em;
@@ -44,7 +49,7 @@ body {
         }
 
     .stats,
-    button {
+    .del-add button {
         font-family: 'Lora', serif;
         font-size: 1.5rem;
     }
