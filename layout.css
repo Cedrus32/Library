@@ -42,8 +42,20 @@ main {
             justify-content: space-around;
             align-content: center;
 
+            padding: var(--half-space);
             margin-bottom: var(--full-space);
         }
+
+            .stats-box {
+                display: flex;
+                flex-flow: column;
+                justify-items: center;
+                align-items: center;
+            }
+
+                .stats-box span {
+                    width: max-content;
+                }
 
         .filter {
             display: flex;
