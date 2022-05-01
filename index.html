@@ -37,28 +37,14 @@
                     </div>
                 </section>
 
-                <section class='filter'>
-                    <!-- filter library by sort/view -->
-                    <div class='sort'>
-                        Sort By:
-                        <select>
-                            <option>Title</option>
-                            <option>Author</option>
-                            <option>Pages</option>
-                            <option>Status</option>
-                        </select>
-                    </div>
-                    <div class='view'>
-                        View:
-                        <input type='radio' id='all' name='view' checked>
-                        <label for='view'>all</label>
-                        <input type='radio' id='unread' name='view'>
-                        <label for='view'>unread</label>
-                        <input type='radio' id='reading' name='view'>
-                        <label for='view'>reading</label>
-                        <input type='radio' id='read' name='view'>
-                        <label for='view'>read</label>
-                    </div>
+                <section class='sort'>
+                    <!-- filter library -->
+                    <button id='srt-title'>Title</button>
+                    <button id='srt-author'>Author</button>
+                    <button id='srt-pages'>Pages</button>
+                    <button id='srt-unread'>Unread</button>
+                    <button id='srt-reading'>Reading</button>
+                    <button id='srt-read'>Read</button>
                 </section>
                 
                 <section class='table'>
@@ -67,10 +53,10 @@
                         <!-- flesh this out later with proper element designations -->
                         <caption>Your Books</caption>
                         <colgroup>
-                            <col id='title'>
-                            <col id='author'>
-                            <col id='pages'>
-                            <col id='status'>
+                            <col id='th-title'>
+                            <col id='th-author'>
+                            <col id='th-pages'>
+                            <col id='th-status'>
                         </colgroup>
                         <thead>
                             <tr>
