@@ -14,14 +14,12 @@ main {
 }
 
 /* MAIN MOBILE/TABLET LAYOUT */
-@media only screen and (min-width: 1101px) {
-    main {
-        display: grid;
-        grid-template-rows: max-content / 1fr / max content;
-        grid-template-areas: 'title'
-                             'content'
-                             'del-add';
-    }
+main {
+    display: grid;
+    grid-template-rows: max-content / 1fr / max content;
+    grid-template-areas: 'title'
+                            'content'
+                            'del-add';
 }
 
     header {
