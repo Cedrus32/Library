@@ -57,11 +57,16 @@ main {
 
         .sort {
             display: flex;
+            gap: 2rem;
+
+            margin-right: calc(-1 * var(--half-space));
             margin-bottom: var(--half-space);
+            margin-left: calc(-1 * var(--half-space));
         }
 
             .sort button {
                 width: calc(100% / 6);
+                padding: 0.20em;
             }
 
         table {

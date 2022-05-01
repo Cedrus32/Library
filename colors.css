@@ -20,6 +20,40 @@ body {
         border-bottom: var(--thick) solid var(--dark);
     }
 
+    .sort {
+        border-bottom: 5px solid var(--accent);
+    }
+
+        .sort button {
+            background-color: var(--dark);
+            color: var(--light);
+
+            border-top: none;
+            border-bottom: 1px solid var(--light);
+        }
+
+            .r-slant {
+                /* right slant */
+            }
+
+            .l-slant {
+                /* left slant */
+            }
+
+            button.view {
+                background-color: var(--accent);
+
+                border-bottom: none;
+            }
+
+            #srt-title {
+                border-left: none;
+            }
+
+            #srt-read {
+                border-right: none;
+            }
+
     /* table body separator & space */
     table td {
         border-top: 1px solid black;
