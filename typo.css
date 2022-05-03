@@ -22,6 +22,13 @@ body {
         font-size: 0.9rem;
     }
 
+        .l-slant::before,
+        .r-slant::after,
+        .l-slant.view::before,
+        .r-slant.view::after {
+            content: '';
+        }
+
     .th-col {
         font-size: 1.15rem;
         letter-spacing: 0.05em;

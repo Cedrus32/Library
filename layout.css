@@ -3,6 +3,8 @@
     --half-space: calc(var(--full-space) / 2);
     --two-space: calc(var(--full-space) * 2);
     --qrt-space: calc(var(--full-space) / 4);
+
+    --pad-filter: 0.2em;
 }
 
 body {
@@ -65,9 +67,43 @@ main {
         }
 
             .sort button {
+                position: relative;
+
                 width: calc(100% / 6);
-                padding: 0.20em;
+                padding: var(--pad-filter);
             }
+
+            .r-slant,
+            .l-slant {
+                position: relative;
+            }
+
+                .l-slant::before,
+                .r-slant::after {
+                    width: calc(1.6em + 2px); height: calc(100% + 1px);
+                }
+
+                .l-slant::before {
+                    /* left slant */
+                    position: absolute;
+                    left: calc(-0.8em - 2px); top: 0em;   
+
+                    transform: skew(-45deg);
+                    z-index: -2;
+                }
+
+                .r-slant::after {
+                    /* right slant */
+                    position: absolute;
+                    left: calc(100% - 1em + 3px); top: 0em;
+
+                    transform: skew(45deg);
+                    z-index: -1;
+                }
+
+                .l-slant.view::before {
+                    z-index: -1;
+                }
 
         table {
             width: 100%;

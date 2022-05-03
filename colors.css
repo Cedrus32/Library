@@ -29,30 +29,39 @@ body {
             color: var(--light);
 
             border-top: none;
+            border-right: none;
             border-bottom: 1px solid var(--light);
+            border-left: none;
         }
 
-            .r-slant {
-                /* right slant */
-            }
+                .l-slant::before,
+                .r-slant::after {
+                    background-color: var(--dark);
+                    border-bottom: 1px solid var(--light);
+                }
 
-            .l-slant {
-                /* left slant */
-            }
+                .l-slant::before {
+                    /* left slant */
+                    border-left: 1px solid var(--light);
+                }
 
-            button.view {
+                .r-slant::after {
+                    /* right slant */
+                    border-right: 1px solid var(--light);
+                }
+
+            .l-slant.view,
+            .r-slant.view {
                 background-color: var(--accent);
-
-                border-bottom: none;
+                border-color: var(--accent);
             }
 
-            #srt-title {
-                border-left: none;
-            }
-
-            #srt-read {
-                border-right: none;
-            }
+                .l-slant.view::before,
+                .r-slant.view::after {
+                    background-color: var(--accent);
+                    border-right: 1px solid var(--light);
+                    border-bottom: 1px solid var(--accent);
+                }
 
     /* table body separator & space */
     table td {
