@@ -25,6 +25,11 @@ main {
                             'del-add';
 }
 
+.v-div {
+    width: 0px; height: calc(100% + var(--half-space));
+    margin-top: calc(-1 * var(--qrt-space));
+}
+
     header {
         grid-area: title;
 

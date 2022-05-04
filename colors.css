@@ -11,6 +11,10 @@ body {
     color: var(--dark);
 }
 
+.v-div {
+    border-left: 1px solid var(--dark);
+}
+
     header {
         color: var(--accent);
     }
