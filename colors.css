@@ -67,3 +67,15 @@ body {
     table td {
         border-top: 1px solid black;
     }
+
+    .del-add {
+        border-top: var(--thick) solid var(--dark);
+        border-bottom: var(--thick) solid var(--dark);
+    }
+
+        .del-add button {
+            background-color: var(--accent);
+            color: var(--light);
+
+            border: none;
+        }

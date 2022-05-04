@@ -3,6 +3,7 @@
     --half-space: calc(var(--full-space) / 2);
     --two-space: calc(var(--full-space) * 2);
     --qrt-space: calc(var(--full-space) / 4);
+    --small-space: calc(var(--full-space) / 8);
 
     --pad-filter: 0.2em;
 }
@@ -122,8 +123,33 @@ main {
         grid-area: del-add;
 
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-content: center;
+
+        gap: var(--half-space);
 
         padding: var(--half-space);
     }
+
+        .del-add button {
+            align-self: center;
+
+            padding: var(--qrt-space);
+        }
+
+            .del,
+            .add,
+            .confirm button {
+                width: 4em;
+            }
+
+        .confirm {
+            display: flex;
+            flex-flow: column;
+
+            gap: var(--small-space);
+        }
+
+            .confirm button {
+                padding: var(--small-space);
+            }
