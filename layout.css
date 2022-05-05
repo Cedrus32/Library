@@ -8,26 +8,22 @@
     --pad-filter: 0.2em;
 }
 
-body {
-    min-height: 100vh;
+html, body {
+    height: 100vh;
 }
 
 main {
+    display: grid;
+    grid-template-rows: max-content / 1fr / max-content;
+    grid-template-areas: 'title'
+                         'content'
+                         'del-add';
+    
     padding: var(--full-space) var(--half-space);
 }
 
-/* MAIN MOBILE/TABLET LAYOUT */
-main {
-    display: grid;
-    grid-template-rows: max-content / 1fr / max content;
-    grid-template-areas: 'title'
-                            'content'
-                            'del-add';
-}
-
 .v-div {
-    width: 0px; height: calc(100% + var(--half-space));
-    margin-top: calc(-1 * var(--qrt-space));
+    width: 0px; height: 100%;
 }
 
     header {
@@ -41,6 +37,7 @@ main {
 
         display: flex;
         flex-flow: column;
+        align-content: flex-start;
     }
 
         .stats {
@@ -48,7 +45,7 @@ main {
             justify-content: space-around;
             align-content: center;
 
-            padding: var(--half-space);
+            padding: var(--qrt-space) var(--half-space);
             margin-bottom: var(--full-space);
         }
 
@@ -57,6 +54,8 @@ main {
                 flex-flow: column;
                 justify-items: center;
                 align-items: center;
+
+                padding-top: var(--qrt-space);
             }
 
                 .stats-box span {
@@ -115,6 +114,11 @@ main {
             width: 100%;
         }
 
+            caption {
+                opacity: 0;
+                height: 0px;
+            }
+
             /* table header bottom space */
             table th {
                 height: calc(1em + var(--half-space));
@@ -132,7 +136,6 @@ main {
         align-content: center;
 
         gap: var(--half-space);
-
         padding: var(--half-space);
     }
 
@@ -152,7 +155,7 @@ main {
             display: flex;
             flex-flow: column;
 
-            gap: var(--small-space);
+            gap: var(--qrt-space);
         }
 
             .confirm button {
