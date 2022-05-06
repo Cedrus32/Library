@@ -14,11 +14,11 @@ html, body {
 
 main {
     display: grid;
-    grid-template-rows: max-content / 1fr / max-content;
-    grid-template-areas: 'title'
-                         'content'
-                         'del-add';
+    grid-template: 'title'    min-content
+                   'content'  1fr
+                   'del-add'  min-content;
     
+    height: 100%;
     padding: var(--full-space) var(--half-space);
 }
 
@@ -35,12 +35,18 @@ main {
     .content {
         grid-area: content;
 
+        display: grid;
+        grid-template-rows: min-content min-content 1fr;
+        grid-template-areas: 'stats'
+                             'sort'
+                             'table';
         display: flex;
         flex-flow: column;
-        align-content: flex-start;
     }
 
         .stats {
+            grid-area: stats;
+
             display: flex;
             justify-content: space-around;
             align-content: center;
@@ -63,6 +69,8 @@ main {
                 }
 
         .sort {
+            grid-area: sort;
+
             display: flex;
             gap: 2rem;
 
@@ -110,23 +118,27 @@ main {
                     z-index: -1;
                 }
 
-        table {
-            width: 100%;
+        .table {
+            grid-area: table;
         }
 
-            caption {
-                opacity: 0;
-                height: 0px;
+            table {
+                width: 100%;
             }
 
-            /* table header bottom space */
-            table th {
-                height: calc(1em + var(--half-space));
-            }
+                caption {
+                    opacity: 0;
+                    height: 0px;
+                }
 
-            tbody tr {
-                height: calc(1em + var(--half-space));
-            }
+                /* table header bottom space */
+                table th {
+                    height: calc(1em + var(--half-space));
+                }
+
+                tbody tr {
+                    height: calc(1em + var(--half-space));
+                }
 
     .del-add {
         grid-area: del-add;
