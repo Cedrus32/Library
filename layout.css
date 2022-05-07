@@ -6,6 +6,11 @@
     --small-space: calc(var(--full-space) / 8);
 
     --pad-filter: 0.2em;
+    
+    /*                   view      main padding         header font       header margin   da bordr     del-add padding          canc/conf lines          canc/conf padding         canc/conf gap      main padding     */
+    /*                 |------|-------------------|-------------------|-------------------|-----|----------------------------|------------------|------------------------------|------------------|------------------| */
+    --height-cont: calc(100vh - var(--full-space) - 1.15rem - 2.25rem - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(2 * 1.5rem) - calc(4 * var(--small-space)) - var(--qrt-space) - var(--full-space));
+
 }
 
 html, body {
@@ -15,7 +20,7 @@ html, body {
 main {
     display: grid;
     grid-template: 'title'    min-content
-                   'content'  1fr
+                   'content'  auto
                    'del-add'  min-content;
     
     height: 100%;
@@ -36,12 +41,12 @@ main {
         grid-area: content;
 
         display: grid;
-        grid-template-rows: min-content min-content 1fr;
-        grid-template-areas: 'stats'
-                             'sort'
-                             'table';
-        display: flex;
-        flex-flow: column;
+        /* grid-template-rows: min-content min-content 1fr; */
+        grid-template: 'stats'    min-content
+                       'sort'     min-content
+                       'table'    1fr;
+
+        height: var(--height-cont);
     }
 
         .stats {
@@ -53,6 +58,8 @@ main {
 
             padding: var(--qrt-space) var(--half-space);
             margin-bottom: var(--full-space);
+
+            /* height: min-content; */
         }
 
             .stats-box {
@@ -77,6 +84,8 @@ main {
             margin-right: calc(-1 * var(--half-space));
             margin-bottom: var(--half-space);
             margin-left: calc(-1 * var(--half-space));
+
+            /* height: min-content; */
         }
 
             .sort button {
@@ -120,6 +129,8 @@ main {
 
         .table {
             grid-area: table;
+            height: auto;
+            overflow: auto;
         }
 
             table {
@@ -148,7 +159,7 @@ main {
         align-content: center;
 
         gap: var(--half-space);
-        padding: var(--half-space);
+        padding: var(--qrt-space) var(--half-space);
     }
 
         .del-add button {
