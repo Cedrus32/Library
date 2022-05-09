@@ -7,9 +7,9 @@
 
     --pad-filter: 0.2em;
     
-    /*                   view      main padding         header font       header margin   da bordr     del-add padding          canc/conf lines          canc/conf padding         canc/conf gap      main padding     */
-    /*                 |------|-------------------|-------------------|-------------------|-----|----------------------------|------------------|------------------------------|------------------|------------------| */
-    --height-cont: calc(100vh - var(--full-space) - 1.15rem - 2.25rem - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(2 * 1.5rem) - calc(4 * var(--small-space)) - var(--qrt-space) - var(--full-space));
+    /*                   view      main padding         header font       header margin   da bordr     del-add padding                  canc/conf lines                  canc/conf padding         canc/conf gap    main padding (qrt) */
+    /*                 |------|-------------------|-------------------|-------------------|-----|----------------------------|----------------------------------|------------------------------|------------------|------------------| */
+    --height-cont: calc(100vh - var(--full-space) - 1.15rem - 2.25rem - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(2 * calc(1.15rem + 1.5rem)) - calc(4 * var(--small-space)) - var(--qrt-space) - var(--qrt-space));
 
 }
 
@@ -20,7 +20,7 @@ html, body {
 main {
     display: grid;
     grid-template: 'title'    min-content
-                   'content'  auto
+                   'content'  var(--height-cont)
                    'del-add'  min-content;
     
     height: 100%;
@@ -45,8 +45,6 @@ main {
         grid-template: 'stats'    min-content
                        'sort'     min-content
                        'table'    1fr;
-
-        height: var(--height-cont);
     }
 
         .stats {
