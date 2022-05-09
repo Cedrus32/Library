@@ -43,33 +43,6 @@ h2, h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
 }
 
-/* standardize margins for `p` elements across browsers */
-
-p {
-    margin-top: 0;
-    margin-bottom: 1rem;
-}
-
-
-/* GROUPING CONTENT ========================= */
-
-/* 1. add correct box sizing in Firefox */
-/* 2. show overflow in Edge, IE */
-
-hr {
-    box-sizing: content-box; /* 1 */ /** conflict w/ `*-selector`? */
-    height: 0px; /* 1 */
-    overflow: visible; /* 2 */
-}
-
-/* 1. correct inheritance, scaling of font size in all browsers */
-/* 2. correct the off `em` font sizing in all browsers */
-
-pre {
-    font-family: monospace, monospace; /* 1 */
-    font-size: 1em; /* 2 */
-}
-
 
 /* TEXT-LEVEL SEMANTICS ========================= */
 
@@ -79,65 +52,8 @@ a {
     background-color: transparent;
 }
 
-/* 1. remove bottom border in Chrome 57- */
-/* 2. add correct text decoration in Chrome, Edge, IE, Opera, Safari */
-
-abbr[title] {
-    border-bottom: none; /* 1 */
-    text-decoration: underline; /* 2 */
-    text-decoration: underline dotted; /* 2 */
-}
-
-/* add correct font weight in Chrome, Edge, Safari */
-
-b,
-strong {
-    font-weight: bolder;
-}
-
-/* 1. correct inheritance, scaling of font size in all browsers */
-/* 2. correct the odd em font sizing in all browsers */
-
-code,
-kbd,
-samp {
-    font-family: monospace, monospace; /* 1 */
-    font-size: 1em; /* 2 */
-}
-
-/* add correct font size in all browsers */
-
-small {
-    font-size: 80%;
-}
-
-/* prevent all `sub` and `sup` elements from affecting line height */
-/* in all browsers */
-
-sub,
-sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-}
-
-sub {
-    bottom: -0.25em;
-}
-  
-sup {
-    top: -0.5em;
-}
-
 
 /* EMBEDDED CONTENT ========================= */
-
-/* remove border on images inside links in IE 10 */
-
-img {
-    border-style: none;
-}
 
 /* clean up borders on tables */
 
@@ -152,7 +68,6 @@ table {
 
 button,
 input,
-optgroup,
 select,
 textarea {
     font-family: inherit; /* 1 */
@@ -223,79 +138,13 @@ legend {
     white-space: normal; /* 1 */
 }
 
-/* add correct vertical alignment in Chrome, Firefox, Opera */
-
-progress {
-    vertical-align: baseline;
-}
-
 /* remove default vertical scrollbar in IE 10+ */
 
 textarea {
     overflow: auto;
 }
 
-/* 1. add correct box sizing in IE 10 */
-/* 2. remove padding in IE 10 */
-
-[type="checkbox"],
-[type="radio"] {
-    box-sizing: border-box; /* 1 */
-    padding: 0; /* 2 */
-}
-
-/* correct cursor style of increment, decrement buttons in Chrome */
-
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-    height: auto;
-}
-
-/* 1. correct off appearance in Chrome, Safari */
-/* 2. correct outline style in Safari */
-
-[type="search"] {
-    -webkit-appearance: textfield; /* 1 */
-    outline-offset: -2px; /* 2 */
-}
-
-/* remove inner padding in Chrome, Safari on macOS */
-
-[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
-}
-
-/* 1. change inability to style clickable types in iOS, Safari */
-/* 2. change font properties to `inherit` in Safari */
-
-::-webkit-file-upload-button {
-    -webkit-appearance: button; /* 1 */
-    font: inherit; /* 2 */
-}
-
-
-/* INTERACTIVE ========================= */
-
-/* add correct display in Edge, IE 10+, Firefox */
-
-details {
-    display: block;
-}
-
-/* add correct display in all browsers */
-
-summary {
-    display: list-item;
-}
-
-
 /* MISC ========================= */
-
-/* add correct display in IE 10+ */
-
-template {
-    display: none;
-}
 
 /* add correct display in IE 10 */
 
