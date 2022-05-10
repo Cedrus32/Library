@@ -18,3 +18,22 @@ function displayLibrary(library) {
     }
 }
 
+let add = document.getElementById('add');
+add.addEventListener('click', () => {
+    console.log('add');
+});
+
+let del = document.getElementById('del');
+del.addEventListener('click', () => {
+    console.log('del');
+});
+
+let confirm = document.getElementById('conf');
+confirm.addEventListener('click', () => {
+    console.log('conf');
+});
+
+let cancel = document.getElementById('canc');
+cancel.addEventListener('click', () => {
+    console.log('cancel');
+});
