@@ -20,7 +20,7 @@ function displayLibrary(library) {
 
 let add = document.getElementById('add');
 add.addEventListener('click', () => {
-    console.log('add');
+    alert('add');
 });
 
 let del = document.getElementById('del');

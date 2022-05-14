@@ -68,8 +68,7 @@ table {
 
 button,
 input,
-select,
-textarea {
+select {
     font-family: inherit; /* 1 */
     font-size: 100%; /* 1 */
     line-height: 1.15; /* 1 */
@@ -118,10 +117,10 @@ button:-moz-focusring,
     outline: 1px dotted ButtonText;
 }
 
-/* correct padding in Firefox */
+/* no padding in all browsers */
 
 fieldset {
-    padding: 0.35em 0.75em 0.625em;
+    padding: 0px;
 }
   
 /* 1. correct text wrapping in Edge, IE */
@@ -136,12 +135,6 @@ legend {
     max-width: 100%; /* 1 */
     padding: 0; /* 3 */
     white-space: normal; /* 1 */
-}
-
-/* remove default vertical scrollbar in IE 10+ */
-
-textarea {
-    overflow: auto;
 }
 
 /* MISC ========================= */

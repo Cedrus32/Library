@@ -77,9 +77,39 @@ body {
         border-bottom: var(--thick) solid var(--dark);
     }
 
-        .del-add button {
+        .del-add button,
+        .canc-conf button {
             background-color: var(--accent);
             color: var(--light);
 
             border: none;
+        }
+
+.popup {
+    background-color: var(--light);
+    border: 1px solid var(--dark);
+}
+
+    fieldset {
+        border: none;
+    }
+
+        legend {
+            color: var(--accent);
+        }
+
+        label {
+            color: rgb(117, 117, 117);
+        }
+
+        input,
+        input:active,
+        input:focus,
+        input:focus-visible {
+            background-color: transparent;
+            border-top: none;
+            border-left: none;
+            border-bottom: 1px solid var(--dark);
+            border-right: none;
+            outline: none;
         }

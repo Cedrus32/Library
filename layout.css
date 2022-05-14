@@ -7,10 +7,13 @@
 
     --pad-filter: 0.2em;
     
-    /*                   view      main padding         header font       header margin   da bordr     del-add padding                  canc/conf lines                  canc/conf padding         canc/conf gap    main padding (qrt) */
-    /*                 |------|-------------------|-------------------|-------------------|-----|----------------------------|----------------------------------|------------------------------|------------------|------------------| */
-    --height-cont: calc(100vh - var(--full-space) - 1.15rem - 2.25rem - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(2 * calc(1.15rem + 1.5rem)) - calc(4 * var(--small-space)) - var(--qrt-space) - var(--qrt-space));
+    /*                   view      main padding         header font       header margin   da bordr     del-add padding           del/add btn lines          del/add btn padding          del/add btn margin      main padding (qrt) */
+    /*                 |------|-------------------|-------------------|-------------------|-----|----------------------------|------------------------|----------------------------|----------------------------|-----------------| */
+    --height-cont: calc(100vh - var(--full-space) - 1.15rem - 2.25rem - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(1.15rem + 1.5rem) - calc(2 * var(--qrt-space)) - calc(2 * var(--qrt-space)) - var(--qrt-space));
 
+    /*                      popup gap             popup padding                  fieldset gap            legend margin           legend lines                        div gap                                input line            input bdr     canc-conf padding         canc/conf btn lines       canc/conf btn padding        canc/conf btn margin     */
+    /*                |------------------|-----------------------------|-----------------------------|--------------------|------------------------|--------------------------------------------|----------------------------------|-----|----------------------------|------------------------|----------------------------|---------------------------| */
+    --height-pop: calc(var(--half-space) + calc(2 * var(--half-space)) + calc(4 * var(--half-space)) + var(--small-space) + calc(1.15rem + 1.5rem) + calc(4 * calc(var(--qrt-space) - 2.25rem)) + calc(4 * calc(1.15rem + 0.9rem)) + 1px + calc(2 * var(--qrt-space)) + calc(1.15rem + 1.5rem) + calc(2 * var(--qrt-space)) + calc(2 * var(--qrt-space)));
 }
 
 html, body {
@@ -41,7 +44,6 @@ main {
         grid-area: content;
 
         display: grid;
-        /* grid-template-rows: min-content min-content 1fr; */
         grid-template: 'stats'    min-content
                        'sort'     min-content
                        'table'    1fr;
@@ -56,8 +58,6 @@ main {
 
             padding: var(--qrt-space) var(--half-space);
             margin-bottom: var(--full-space);
-
-            /* height: min-content; */
         }
 
             .stats-box {
@@ -66,7 +66,7 @@ main {
                 justify-items: center;
                 align-items: center;
 
-                padding-top: var(--qrt-space);
+                padding: var(--qrt-space) 0px;
             }
 
                 .stats-box span {
@@ -82,8 +82,6 @@ main {
             margin-right: calc(-1 * var(--half-space));
             margin-bottom: var(--half-space);
             margin-left: calc(-1 * var(--half-space));
-
-            /* height: min-content; */
         }
 
             .sort button {
@@ -127,7 +125,6 @@ main {
 
         .table {
             grid-area: table;
-            height: auto;
             overflow: auto;
         }
 
@@ -149,36 +146,66 @@ main {
                     height: calc(1em + var(--half-space));
                 }
 
-    .del-add {
-        grid-area: del-add;
+.popup {
+    display: flex;
+    flex-flow: column;
 
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+
+    gap: var(--half-space);
+    padding: var(--half-space);
+
+    height: var(--height-pop);
+}
+
+    fieldset {
         display: flex;
-        justify-content: center;
-        align-content: center;
-
+        flex-flow: column;
+    
         gap: var(--half-space);
-        padding: var(--qrt-space) var(--half-space);
+        width: clamp(300px, 60vw, 600px);
     }
-
-        .del-add button {
-            align-self: center;
-
-            padding: var(--qrt-space);
-        }
-
-            .del,
-            .add,
-            .confirm button {
-                width: 4em;
-            }
-
-        .confirm {
+    
+        fieldset div {
             display: flex;
             flex-flow: column;
 
             gap: var(--qrt-space);
+            width: 100%;
         }
 
-            .confirm button {
-                padding: var(--small-space);
+            legend {
+                margin-bottom: var(--small-space);
             }
+
+            label {
+                margin-bottom: -2.25rem;
+            }
+
+/* .hide {
+    display: none;
+} */
+
+.del-add,
+.canc-conf {
+    grid-area: del-add;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    gap: var(--half-space);
+    padding: var(--qrt-space) var(--half-space);
+}
+
+    .del-add button,
+    .canc-conf button {
+        align-self: center;
+
+        padding: var(--qrt-space);
+        margin: var(--qrt-space) 0px;
+        
+        width: 4.5em;
+    }

@@ -52,7 +52,6 @@
                 <section class='table'>
                     <!-- library table -->
                     <table>
-                        <!-- flesh this out later with proper element designations -->
                         <caption>Your Books</caption>
                         <colgroup>
                             <col id='th-title'>
@@ -69,6 +68,70 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- make this dynamic later -->
+                            <tr>
+                                <!-- <th scope='row'>Book 1</th> -->
+                                <td>Book 1</td>
+                                <td>Person 1</td>
+                                <td>1</td>
+                                <td>unread</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 2</th> -->
+                                <td>Book 2</td>
+                                <td>Person 2</td>
+                                <td>2</td>
+                                <td>reading</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 3</th> -->
+                                <td>Book 3</td>
+                                <td>Person 3</td>
+                                <td>3</td>
+                                <td>read</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 1</th> -->
+                                <td>Book 1</td>
+                                <td>Person 1</td>
+                                <td>1</td>
+                                <td>unread</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 2</th> -->
+                                <td>Book 2</td>
+                                <td>Person 2</td>
+                                <td>2</td>
+                                <td>reading</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 3</th> -->
+                                <td>Book 3</td>
+                                <td>Person 3</td>
+                                <td>3</td>
+                                <td>read</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 1</th> -->
+                                <td>Book 1</td>
+                                <td>Person 1</td>
+                                <td>1</td>
+                                <td>unread</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 2</th> -->
+                                <td>Book 2</td>
+                                <td>Person 2</td>
+                                <td>2</td>
+                                <td>reading</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope='row'>Book 3</th> -->
+                                <td>Book 3</td>
+                                <td>Person 3</td>
+                                <td>3</td>
+                                <td>read</td>
+                            </tr>
                             <tr>
                                 <!-- <th scope='row'>Book 1</th> -->
                                 <td>Book 1</td>
@@ -97,17 +160,46 @@
     
             <section class='del-add'>
                 <!-- delete/add books -->
-                <button class='del'>Delete</button>
+                <button id='del'>Delete</button>
                 <div class='v-div'></div>
-                <div class='confirm'>
-                    <button>Cancel</button>
-                    <button>Confirm</button>
-                </div>
-                <div class='v-div'></div>
-                <button class='add'>Add</button>
+                <button id='add'>Add</button>
             </section>
         </main>
         
+        <div class='popup hide'>
+            <form action='' method='post'>
+                <fieldset>
+                    <legend>Add Your Book</legend>
+                    <div>
+                        <label>Title</label>
+                        <input type='text' name='title'
+                               aria-required='true' required>
+                    </div>
+                    <div>
+                        <label>Author</label>
+                        <input type='text' name='author'
+                               aria-required='true' required>
+                    </div>
+                    <div>
+                        <label># Pages</label>
+                        <input type='text' name='pages'
+                        pattern="[0-9]+"
+                        aria-required='false'>
+                    </div>
+                    <div>
+                        <label>Status</label>
+                        <input type='text' name='status'
+                               aria-required='false'>
+                    </div>                    
+                </fieldset>
+            </form>
+            <section class='canc-conf'>
+                <!-- cancel/confirm add book -->
+                <button id='canc'>Cancel</button>
+                <div class='v-div'></div>
+                <button id='conf'>Confirm</button>
+            </section>
+        </div>
 
         <script src='script.js' async></script>
     </body>

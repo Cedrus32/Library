@@ -56,7 +56,27 @@ body {
         }
 
     .stats,
-    .del-add button {
+    .del-add button,
+    .canc-conf button {
         font-family: 'Lora', serif;
         font-size: 1.5rem;
+        text-align: center;
+    }
+
+legend {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+}
+
+    label {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+    }
+
+    input,
+    input:active,
+    input:focus,
+    input:focus-visible {
+        line-height: 1.5rem;
     }
