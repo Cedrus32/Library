@@ -19,8 +19,10 @@ function displayLibrary(library) {
 }
 
 let add = document.getElementById('add');
+let popup = document.querySelector('.popup');
 add.addEventListener('click', () => {
-    alert('add');
+    console.log('add');
+    popup.classList.add('show');
 });
 
 let del = document.getElementById('del');
@@ -31,9 +33,11 @@ del.addEventListener('click', () => {
 let confirm = document.getElementById('conf');
 confirm.addEventListener('click', () => {
     console.log('conf');
+    popup.classList.remove('show');
 });
 
 let cancel = document.getElementById('canc');
 cancel.addEventListener('click', () => {
     console.log('cancel');
+    popup.classList.remove('show');
 });
