@@ -25,11 +25,6 @@ add.addEventListener('click', () => {
     popup.classList.add('show');
 });
 
-let del = document.getElementById('del');
-del.addEventListener('click', () => {
-    console.log('del');
-});
-
 let confirm = document.getElementById('conf');
 confirm.addEventListener('click', () => {
     console.log('conf');

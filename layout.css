@@ -7,7 +7,7 @@
 
     --pad-filter: 0.2em;
     
-    /*                   view      main padding         header font       header margin   da bordr     del-add padding           del/add btn lines          del/add btn padding          del/add btn margin      main padding (qrt) */
+    /*                   view      main padding         header font       header margin   da bordr       add padding               add btn lines              add btn padding              add btn margin        main padding (qrt) */
     /*                 |------|-------------------|-------------------|-------------------|-----|----------------------------|------------------------|----------------------------|----------------------------|-----------------| */
     --height-cont: calc(100vh - var(--full-space) - 1.15rem - 2.25rem - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(1.15rem + 1.5rem) - calc(2 * var(--qrt-space)) - calc(2 * var(--qrt-space)) - var(--qrt-space));
 
@@ -24,7 +24,7 @@ main {
     display: grid;
     grid-template: 'title'    min-content
                    'content'  var(--height-cont)
-                   'del-add'  min-content;
+                   'add'  min-content;
     
     height: 100%;
     padding: var(--full-space) var(--half-space);
@@ -214,9 +214,9 @@ main {
                 margin-bottom: -2.25rem;
             }
 
-.del-add,
+.add,
 .canc-conf {
-    grid-area: del-add;
+    grid-area: add;
 
     display: flex;
     justify-content: center;
@@ -226,7 +226,7 @@ main {
     padding: var(--qrt-space) var(--half-space);
 }
 
-    .del-add button,
+    .add button,
     .canc-conf button {
         align-self: center;
 

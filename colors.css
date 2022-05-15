@@ -72,12 +72,12 @@ body {
         border-top: 1px solid black;
     }
 
-    .del-add {
+    .add {
         border-top: var(--thick) solid var(--dark);
         border-bottom: var(--thick) solid var(--dark);
     }
 
-        .del-add button,
+        .add button,
         .canc-conf button {
             background-color: var(--accent);
             color: var(--light);

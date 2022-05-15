@@ -56,7 +56,7 @@ body {
         }
 
     .stats,
-    .del-add button,
+    .add button,
     .canc-conf button {
         font-family: 'Lora', serif;
         font-size: 1.5rem;
