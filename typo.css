@@ -40,6 +40,7 @@ body {
         }
 
         tr th:nth-child(1),
+        tr td:nth-child(1),
         tr th:nth-child(2),
         tr td:nth-child(2) {
             text-align: start;
@@ -51,7 +52,9 @@ body {
         }
 
         tr th:nth-child(4),
-        tr td:nth-child(4) {
+        tr td:nth-child(4),
+        tr th:nth-child(5),
+        tr td:nth-child(5) {
             text-align: center;
         }
 

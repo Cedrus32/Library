@@ -168,17 +168,6 @@ main {
     z-index: 2;
 }
 
-/* div.popup.show::before  {
-    content: 'this will be a filter';
-    position: absolute;
-    left: calc(0px); top: calc(0px);
-    z-index: -10;
-
-    width: 100vw; height: 100vh;
-
-    background-color: pink;
-} */
-
 .popup.show + .show-filter {
     position: absolute;
     left: 0px; top: 0px;
