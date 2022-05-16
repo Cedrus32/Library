@@ -7,13 +7,13 @@
 
     --pad-filter: 0.2em;
     
-    /*                   view      main padding         header font       header margin   da bordr       add padding               add btn lines              add btn padding              add btn margin        main padding (qrt) */
-    /*                 |------|-------------------|-------------------|-------------------|-----|----------------------------|------------------------|----------------------------|----------------------------|-----------------| */
-    --height-cont: calc(100vh - var(--full-space) - 1.15rem - 2.25rem - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(1.15rem + 1.5rem) - calc(2 * var(--qrt-space)) - calc(2 * var(--qrt-space)) - var(--qrt-space));
+    /*                   view      main padding               header font            header margin   da bordr       add padding                       add btn lines                     add btn padding             add btn margin        main padding (qrt) */
+    /*                 |------|-------------------|------------------------------|-------------------|-----|----------------------------|--------------------------------------|----------------------------|----------------------------|-----------------| */
+    --height-cont: calc(100vh - var(--full-space) - 1.15rem - var(--main-header) - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(1.15rem + var(--second-header)) - calc(2 * var(--qrt-space)) - calc(2 * var(--qrt-space)) - var(--qrt-space));
 
-    /*                      popup gap             popup padding                  fieldset gap            legend margin           legend lines                        div gap                                input line            input bdr     canc-conf padding         canc/conf btn lines       canc/conf btn padding        canc/conf btn margin     */
-    /*                |------------------|-----------------------------|-----------------------------|--------------------|------------------------|--------------------------------------------|----------------------------------|-----|----------------------------|------------------------|----------------------------|---------------------------| */
-    --height-pop: calc(var(--half-space) + calc(2 * var(--half-space)) + calc(4 * var(--half-space)) + var(--small-space) + calc(1.15rem + 1.5rem) + calc(4 * calc(var(--qrt-space) - 2.25rem)) + calc(4 * calc(1.15rem + 0.9rem)) + 1px + calc(2 * var(--qrt-space)) + calc(1.15rem + 1.5rem) + calc(2 * var(--qrt-space)) + calc(2 * var(--qrt-space)));
+    /*                      popup gap             popup padding                  fieldset gap            legend margin                  legend lines                               div gap                                   input line              input bdr     canc-conf padding                canc/conf btn lines              canc/conf btn padding        canc/conf btn margin     */
+    /*                |------------------|-----------------------------|-----------------------------|--------------------|--------------------------------------|--------------------------------------------|---------------------------------------|-----|----------------------------|--------------------------------------|----------------------------|---------------------------| */
+    --height-pop: calc(var(--half-space) + calc(2 * var(--half-space)) + calc(4 * var(--half-space)) + var(--small-space) + calc(1.15rem + var(--second-header)) + calc(4 * calc(var(--qrt-space) - 2.25rem)) + calc(4 * calc(1.15rem + var(--base))) + 1px + calc(2 * var(--qrt-space)) + calc(1.15rem + var(--second-header)) + calc(2 * var(--qrt-space)) + calc(2 * var(--qrt-space)));
 }
 
 html, body {
