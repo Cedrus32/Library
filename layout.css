@@ -146,20 +146,22 @@ main {
                     td {
                         padding-left: var(--small-space);
                         padding-right: var(--small-space);
+
+                        max-width: 0px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                     }
 
                     table th#title,
                     table th#author {
-                        width: 30%;
+                        width: 27.5%;
                     }
 
-                    table th#pages {
-                        width: 20%;
-                    }
-
+                    table th#pages,
                     table th#status,
                     table th#delete {
-                        width: 10%;
+                        width: 15%;
                     }
 
                 tbody tr {
