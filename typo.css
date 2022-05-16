@@ -3,7 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&display=swap');
 
 :root {
-    --base: 0.9rem;
+    /* --base: 0.9rem; */
+    --base: calc(0.5rem + 0.5vw);
     --main-header: calc(2.5 * var(--base));
     --second-header: calc(1.6 * var(--base));
     --table-header: calc(1.3 * var(--base));

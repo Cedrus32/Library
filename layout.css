@@ -1,5 +1,5 @@
 :root {
-    --full-space: 50px;
+    --full-space: 5vh;
     --half-space: calc(var(--full-space) / 2);
     --two-space: calc(var(--full-space) * 2);
     --qrt-space: calc(var(--full-space) / 4);
@@ -144,6 +144,10 @@ main {
 
                 tbody tr {
                     height: calc(1em + var(--half-space));
+                }
+
+                td img {
+                    height: calc(0.5em + var(--base));
                 }
 
 .popup {
