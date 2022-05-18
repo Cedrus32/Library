@@ -167,25 +167,29 @@
                 <fieldset>
                     <legend>Add Your Book</legend>
                     <div>
-                        <label>Title</label>
-                        <input type='text' name='title'
-                               aria-required='true' required>
+                        <input type='text' id='book-title' name='title'
+                               aria-required='true' required
+                               placeholder=' '>
+                        <label for='book-title' aria-label='Enter Book Title'>Title</label>
                     </div>
                     <div>
-                        <label>Author</label>
-                        <input type='text' name='author'
-                               aria-required='true' required>
+                        <input type='text' id='book-author' name='author'
+                               aria-required='true' required
+                               placeholder=' '>
+                        <label for='book-author' aria-label='Enter Book Author'>Author</label>
                     </div>
                     <div>
-                        <label># Pages</label>
-                        <input type='text' name='pages'
+                        <input type='text' id='book-pages' name='pages'
                         pattern="[0-9]+"
-                        aria-required='false'>
+                        aria-required='false'
+                        placeholder=' '>
+                        <label for='book-pages' aria-label='Enter Number of Pages'># Pages</label>
                     </div>
                     <div>
-                        <label>Status</label>
-                        <input type='text' name='status'
-                               aria-required='false'>
+                        <input type='text' id='book-status' name='status'
+                               aria-required='false'
+                               placeholder=' '>
+                        <label for='book-status' aria-label='Select Whether Book is Unread, Reading, or Read'>Status</label>
                     </div>                    
                 </fieldset>
             </form>

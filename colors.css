@@ -103,18 +103,16 @@ body {
             color: var(--accent);
         }
 
-        label {
-            color: rgb(117, 117, 117);
+        fieldset div {
+            border-bottom: 1px solid var(--dark);
         }
 
-        input,
-        input:active,
-        input:focus,
-        input:focus-visible {
-            background-color: transparent;
-            border-top: none;
-            border-left: none;
-            border-bottom: 1px solid var(--dark);
-            border-right: none;
-            outline: none;
-        }
+            label {
+                color: rgb(117, 117, 117);
+            }
+
+            input {
+                background-color: transparent;
+                border: none;
+                outline: none;
+            }

@@ -12,7 +12,7 @@
     --height-cont: calc(100vh - var(--full-space) - 1.15rem - var(--main-header) - var(--full-space) - 8px - calc(2 * var(--qrt-space)) - calc(1.15rem + var(--second-header)) - calc(2 * var(--qrt-space)) - calc(2 * var(--qrt-space)) - var(--qrt-space));
 
     /*                         fieldset gap             legend margin                legend line                             input lines                    form margin          canc-conf padding                canc/conf btn lines              canc/conf btn padding         canc/conf btn margin     */
-    /*                |-----------------------------|------------------|--------------------------------------|----------------------------------------|-------------------|----------------------------|--------------------------------------|----------------------------|---------------------------| */
+    /*                |----------------------------|-------------------|--------------------------------------|----------------------------------------|-------------------|----------------------------|--------------------------------------|----------------------------|---------------------------| */
     --height-pop: calc(calc(3 * var(--half-space)) + var(--half-space) + calc(1.15rem + var(--second-header)) + calc(4 * calc(1.15rem + var(--base)))  + var(--half-space) + calc(2 * var(--qrt-space)) + calc(1.15rem + var(--second-header)) + calc(2 * var(--qrt-space)) + calc(2 * var(--qrt-space)));
 }
 
@@ -200,34 +200,51 @@ main {
     width: 100vw; height: 100vh;
 }
 
-    fieldset {
-        display: flex;
-        flex-flow: column;
-    
-        gap: var(--half-space);
-        width: clamp(300px, 60vw, 600px);
+    form,
+    legend {
+        margin-bottom: var(--half-space);
     }
-    
-        fieldset div {
+
+        fieldset {
             display: flex;
             flex-flow: column;
-
-            position: relative;
-            width: 100%;
+        
+            gap: var(--half-space);
+            width: clamp(300px, 60vw, 600px);
         }
+        
+            fieldset div {
+                display: flex;
+                flex-flow: column;
 
-            form,
-            legend {
-                margin-bottom: var(--half-space);
+                position: relative;
+                width: 100%;
             }
 
-            label {
-                /* margin-bottom: calc(-1 * calc(1.15rem + var(--base))); */
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                z-index: -1;
-            }
+                input {
+                    width: 100%;
+                }
+
+                label {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: -1;
+                }
+
+                input:active + label,
+                input:focus + label,
+                input:focus-visible + label,
+                input:not(:placeholder-shown) + label {
+                    /* when input is selected || */
+                    /* NOT showing placeholder text (full) */
+                    width: 100%;
+                }
+
+                input:placeholder-shown + label {
+                    /* showing placeholder text (empty) */
+                    width: auto;
+                }
 
 .add,
 .canc-conf {

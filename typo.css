@@ -81,8 +81,24 @@ legend {
 
     label {
         font-family: 'Poppins', sans-serif;
-        font-size: var(--base);
+        font-size: var(---base);
         letter-spacing: 0.05em;
+    }
+
+    /* for transition */
+    input:active + label,
+    input:focus + label,
+    input:focus-visible + label,
+    input:not(:placeholder-shown) + label {
+        /* when input is selected || */
+        /* NOT showing placeholder text (full) */
+        text-align: right;
+    }
+
+    /* for transition */
+    input:placeholder-shown + label {
+        /* showing placeholder text (empty) */
+        text-align: left;
     }
 
     input,
