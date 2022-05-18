@@ -90,6 +90,11 @@ body {
     border: 1px solid var(--dark);
 }
 
+.popup.show + .show-filter {
+    background-color: var(--dark);
+    filter: opacity(0.5);
+}
+
     fieldset {
         border: none;
     }
