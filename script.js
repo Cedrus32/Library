@@ -40,8 +40,38 @@ function addBook() {
 // }
 
 
-// -------------------- MAKE SAMPLE BOOKS -------------------- //
+// -------------------- ADD SAMPLE BOOKS -------------------- //
 
+sampleBooks = ['Dune, Frank Herbert, 685, read',
+               'Outlander, Diana Gabaldon, 850, read',
+               'Shadow and Bone, Leigh Bardugo, 358, read',
+               'Gyo, Ito Junji, 400, unread',
+               'Shadow & Claw, Gene Wolfe, 413, unread',
+               'Darker Shades of Magic, V.E. Schwab, 400, read',
+               'Sarum, Edward Rutherford, 912, read',
+               'American Gods, Neil Gaiman, 635, unread',
+               'Lirael, Garth Nix, 464, reading',
+               'Sabriel, Garth Nix, 491, read',
+              ]
+
+for (let book in sampleBooks) {
+    // console.log(sampleBooks[book]);
+    // * read through book, split @ ', ' and assign to title, author, pages, status
+    let protoBook = sampleBooks[book].split(', ');
+    // console.log(protoBook);
+    // * create new Book instance
+    let protoTitle = protoBook[0];
+    let protoAuthor = protoBook[1];
+    let protoPages = protoBook[2];
+    let protoStatus = protoBook[3];
+    // console.log(protoStatus);
+    let newBook = new Book(protoTitle, protoAuthor, protoPages, protoStatus);
+    // * push to library
+    myLibrary.push(newBook);
+}
+
+// ! test library
+// console.log(myLibrary);
 
 // -------------------- BUTTONS -------------------- //
 
