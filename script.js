@@ -15,11 +15,11 @@ function makeBook() {
     let bookAuthor = document.getElementById('book-author').value;
     let bookPages = document.getElementById('book-pages').value;
     let bookStatus = document.getElementById('book-status').value;
-    // console.log(bookTitle + ' ' + bookAuthor + ' ' + bookPages + ' ' + bookStatus);
+    // ? console.log(bookTitle + ' ' + bookAuthor + ' ' + bookPages + ' ' + bookStatus);
     
     // * create Book instance...
     let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
-    // console.log(newBook);
+    // ? console.log(newBook);
 
     return newBook;
 }
@@ -31,13 +31,49 @@ function addBook() {
     myLibrary.push(newBook);
 }
 
-// function displayLibrary(myLibrary) {
-//     let book;
-//     for (book in myLibrary) {
-//         console.log(myLibrary[book]);
-//         // generate table
-//     }
-// }
+let table = document.querySelector('tbody');
+// ? console.log(table);
+function displayLibrary(myLibrary) {
+    let book;
+    for (book in myLibrary) {
+        console.log(myLibrary[book]);
+        // * generate row
+        let row = document.createElement('tr');
+        table.appendChild(row);
+        // ? console.log(row);
+        // * generate cells
+        for (let i = 0; i < 5; i++) {
+            let cell = document.createElement('td');
+            row.appendChild(cell);
+            // * populate row/cells with data
+            switch (i) {
+                case 0:
+                    cell.textContent = myLibrary[book].title;
+                    // console.log(myLibrary[book].title);
+                    break;
+                case 1:
+                    cell.textContent = myLibrary[book].author;
+                    // console.log(myLibrary[book].author);
+                    break;
+                case 2:
+                    cell.textContent = myLibrary[book].pages;
+                    // console.log(myLibrary[book].pages);
+                    break;
+                case 3:
+                    cell.textContent = myLibrary[book].status;
+                    // console.log(myLibrary[book].status);
+                    break;
+                case 4:
+                    let delIcon = document.createElement('img');
+                    delIcon.src = './icons/delete.svg';
+                    delIcon.alt = 'delete book'
+                    cell.appendChild(delIcon);
+                    // console.log('delete');
+            }
+        }
+        
+    }
+}
 
 
 // -------------------- ADD SAMPLE BOOKS -------------------- //
@@ -55,23 +91,24 @@ sampleBooks = ['Dune, Frank Herbert, 685, read',
               ]
 
 for (let book in sampleBooks) {
-    // console.log(sampleBooks[book]);
+    // ? console.log(sampleBooks[book]);
     // * read through book, split @ ', ' and assign to title, author, pages, status
     let protoBook = sampleBooks[book].split(', ');
-    // console.log(protoBook);
+    // ? console.log(protoBook);
     // * create new Book instance
     let protoTitle = protoBook[0];
     let protoAuthor = protoBook[1];
     let protoPages = protoBook[2];
     let protoStatus = protoBook[3];
-    // console.log(protoStatus);
+    // ? console.log(protoStatus);
     let newBook = new Book(protoTitle, protoAuthor, protoPages, protoStatus);
     // * push to library
     myLibrary.push(newBook);
 }
 
-// ! test library
-// console.log(myLibrary);
+// ? console.log(myLibrary);
+
+displayLibrary(myLibrary);
 
 // -------------------- BUTTONS -------------------- //
 
