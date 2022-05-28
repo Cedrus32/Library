@@ -1,44 +1,43 @@
-// -------------------- LIBRARY FUNCTIONS -------------------- //
+// -------------------- BOOK FUNCTIONS -------------------- //
 let myLibrary = [];
 
-function Book(bookTitle, bookAuthor, bookPages, bookStatus) {
-    // * constructor for book object
+function Book(bookTitle, bookAuthor, bookPages, bookStatus, bookID) {
     this.title = bookTitle;
     this.author = bookAuthor;
     this.pages = bookPages;
     this.status = bookStatus;
+    this.id = bookID;
 }
 
+let bookID = 0;
 function makeBook() {
-    // * get inputs...
     let bookTitle = document.getElementById('book-title').value;
     let bookAuthor = document.getElementById('book-author').value;
     let bookPages = document.getElementById('book-pages').value;
     let bookStatus = document.getElementById('book-status').value;
-    // * create Book instance...
-    let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
+    bookID = bookID++;
 
+    let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus, bookID);
     return newBook;
 }
 
 function addBook() {
-    // * captures input, creates new Book
     let newBook = makeBook();
-    // * add to library
     myLibrary.push(newBook);
 }
+
+
+
+// -------------------- ADD/REFRESH -------------------- //
 
 let table = document.querySelector('tbody');
 function displayLibrary(myLibrary) {
     for (let book in myLibrary) {
-        // * generate row
         let row = document.createElement('tr');
         table.appendChild(row);
-        // * generate cells
         for (let i = 0; i < 5; i++) {
             let cell = document.createElement('td');
             row.appendChild(cell);
-            // * populate row/cells with data
             switch (i) {
                 case 0:
                     cell.textContent = myLibrary[book].title;
@@ -55,7 +54,8 @@ function displayLibrary(myLibrary) {
                 case 4:
                     let delIcon = document.createElement('img');
                     delIcon.src = './icons/delete.svg';
-                    delIcon.alt = 'delete book'
+                    delIcon.alt = 'delete book';
+                    delIcon.id = myLibrary[book].id;
                     cell.appendChild(delIcon);
             }
         }
@@ -66,6 +66,47 @@ function clearTable(table) {
     while (table.lastChild) {
         table.removeChild(table.lastChild);
     }
+}
+
+function refreshDisplay() {
+    clearTable(table);
+    displayLibrary(myLibrary);
+}
+
+
+
+// -------------------- DELETE/REFRESH -------------------- //
+
+function deleteRow(icon) {
+    let parentRow = icon.parentElement.parentElement;
+    parentRow.remove();
+}
+
+function deleteData(bookID) {
+    console.log('enter deleteData()');
+    let idNum = parseInt(bookID);
+    for (let book in myLibrary) {
+        if (myLibrary[book].id === idNum) {
+            console.log('delete this book');
+            let bookIndex = myLibrary.indexOf(myLibrary[book]);
+            myLibrary.splice(bookIndex, 1);
+        }
+    }
+}
+
+function removeBook() {
+    delIcons.forEach(icon => icon.addEventListener('click', () => {
+        let delBookID = icon.id;
+        deleteRow(icon);
+        deleteData(delBookID);
+        console.log(myLibrary);
+    }));
+}
+
+function getDelIcons() {
+    console.log('getDelIcons');
+    delIcons = document.querySelectorAll('img');
+    console.log(delIcons);
 }
 
 
@@ -93,44 +134,44 @@ function createSampleBooks(sampleBooks) {
         let author = splitBook[1];
         let pages = splitBook[2];
         let status = splitBook[3];
+        let id = bookID;
         // * create new Book instance
-        let newBook = new Book(title, author, pages, status);
+        let newBook = new Book(title, author, pages, status, id);
         // * push to library
         myLibrary.push(newBook);
+        bookID++;
     }
 }
 
 createSampleBooks(sampleBooks);
 displayLibrary(myLibrary);
+console.log(myLibrary);
 
 
+// -------------------- BUTTON FUNCTIONALITY -------------------- //
 
-// -------------------- BUTTONS -------------------- //
+// * remove book
+let delIcons = document.querySelectorAll('img');
+removeBook();
 
 // * brings popup form
 let add = document.getElementById('add');
 let popup = document.querySelector('.popup');
 add.addEventListener('click', () => {
-    // * open popup
     popup.classList.add('show');
 });
 
 // * makes & adds new book to library
 let confirm = document.getElementById('conf');
 confirm.addEventListener('click', () => {
-    // * add book to library
     addBook();
-    // * close popup
     popup.classList.remove('show');
-    // * clear table
-    clearTable(table);
-    // * display updated library
-    displayLibrary(myLibrary);
+    refreshDisplay();
+    getDelIcons();
 });
 
 // * forgets input
 let cancel = document.getElementById('canc');
 cancel.addEventListener('click', () => {
-    // * close popup
     popup.classList.remove('show');
 });
