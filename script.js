@@ -57,6 +57,7 @@ function displayLibrary(myLibrary) {
                     delIcon.alt = 'delete book';
                     delIcon.id = myLibrary[book].id;
                     cell.appendChild(delIcon);
+                    setRemoveListener(delIcon);
             }
         }
     }
@@ -83,30 +84,22 @@ function deleteRow(icon) {
 }
 
 function deleteData(bookID) {
-    console.log('enter deleteData()');
     let idNum = parseInt(bookID);
     for (let book in myLibrary) {
         if (myLibrary[book].id === idNum) {
-            console.log('delete this book');
             let bookIndex = myLibrary.indexOf(myLibrary[book]);
             myLibrary.splice(bookIndex, 1);
         }
     }
 }
 
-function removeBook() {
-    delIcons.forEach(icon => icon.addEventListener('click', () => {
+function setRemoveListener(icon) {
+    icon.addEventListener('click', () => {
         let delBookID = icon.id;
         deleteRow(icon);
         deleteData(delBookID);
-        console.log(myLibrary);
-    }));
-}
-
-function getDelIcons() {
-    console.log('getDelIcons');
-    delIcons = document.querySelectorAll('img');
-    console.log(delIcons);
+        // ! console.log(myLibrary);
+    })
 }
 
 
@@ -145,14 +138,11 @@ function createSampleBooks(sampleBooks) {
 
 createSampleBooks(sampleBooks);
 displayLibrary(myLibrary);
-console.log(myLibrary);
 
 
 // -------------------- BUTTON FUNCTIONALITY -------------------- //
 
-// * remove book
-let delIcons = document.querySelectorAll('img');
-removeBook();
+// * remove functionality set when generating table ^^^
 
 // * brings popup form
 let add = document.getElementById('add');
@@ -167,10 +157,10 @@ confirm.addEventListener('click', () => {
     addBook();
     popup.classList.remove('show');
     refreshDisplay();
-    getDelIcons();
+    // ! console.log(myLibrary);
 });
 
-// * forgets input
+// * cancels input
 let cancel = document.getElementById('canc');
 cancel.addEventListener('click', () => {
     popup.classList.remove('show');
