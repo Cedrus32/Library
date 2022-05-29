@@ -116,3 +116,12 @@ body {
                 border: none;
                 outline: none;
             }
+
+            input:active:not(:placeholder-shown):invalid + label,
+            input:focus:not(:placeholder-shown):invalid + label,
+            input:focus-visible:not(:placeholder-shown):invalid + label,
+            input:not(:placeholder-shown):invalid + label {
+                /* when input is selected || */
+                /* NOT showing placeholder text (full) */
+                color: red;
+            }
