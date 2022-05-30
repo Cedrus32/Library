@@ -104,6 +104,28 @@ function setRemoveListener(icon) {
 
 
 
+// -------------------- FORM VALIDATION -------------------- //
+
+let inputList = document.querySelectorAll('input');
+let inputArray = Array.from(inputList);
+let validLog = [];
+function isValid(inputValue) {
+    if (!inputValue.validity.valid) {
+        inputValue.setCustomValidity('TEST CUSTOM VALIDITY');
+        validLog.push(inputValue);
+    }
+    return inputValue.validity.valid;
+}
+
+function throwError() {
+    let errorSpan = document.getElementById('error');
+    let errorTarget = validLog[0];
+    console.log(errorSpan);
+    errorSpan.textContent = validLog[0].validationMessage;
+}
+
+
+
 // -------------------- ADD SAMPLE BOOKS -------------------- //
 
 sampleBooks = ['Dune, Frank Herbert, 685, read',
@@ -140,6 +162,7 @@ createSampleBooks(sampleBooks);
 displayLibrary(myLibrary);
 
 
+
 // -------------------- BUTTON FUNCTIONALITY -------------------- //
 
 // * remove functionality set when generating table ^^^
@@ -154,10 +177,16 @@ add.addEventListener('click', () => {
 // * makes & adds new book to library
 let confirm = document.getElementById('conf');
 confirm.addEventListener('click', () => {
-    addBook();
-    popup.classList.remove('show');
-    refreshDisplay();
-    // ! console.log(myLibrary);
+    // * if all input valid
+    if (inputArray.every(isValid)) {
+        addBook();
+        popup.classList.remove('show');
+        refreshDisplay();
+        // ! console.log(myLibrary);
+    }
+    // * else...
+        // add error message next to popup legend (add div container)
+        throwError();
 });
 
 // * cancels input

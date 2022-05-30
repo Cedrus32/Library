@@ -85,7 +85,10 @@
         <div class='popup'>
             <form action='' method='post'>
                 <fieldset>
-                    <legend>Add Your Book</legend>
+                    <div class='popup-header'>
+                        <legend>Add Your Book</legend>
+                        <span id='error'><!-- generate custom error message --></span>
+                    </div>
                     <div>
                         <input type='text' id='book-title' name='title'
                                aria-required='true' required
@@ -100,14 +103,14 @@
                     </div>
                     <div>
                         <input type='text' id='book-pages' name='pages'
-                        pattern="[0-9]+"
-                        aria-required='false'
+                               pattern='[0-9]+'
+                               aria-required='true' required
                                placeholder=' '>
                         <label for='book-pages' aria-label='Enter Number of Pages'># Pages</label>
                     </div>
                     <div>
                         <input type='text' id='book-status' name='status'
-                               aria-required='false'
+                               aria-required='true' required
                                placeholder=' '>
                         <label for='book-status' aria-label='Select Whether Book is Unread, Reading, or Read'>Status</label>
                     </div>                    
