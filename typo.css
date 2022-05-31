@@ -8,6 +8,7 @@
     --main-header: calc(2.5 * var(--base));
     --second-header: calc(1.6 * var(--base));
     --table-header: calc(1.3 * var(--base));
+    --error-msg: calc(1.2 * var(--base));
 }
 
 body {
@@ -78,6 +79,11 @@ legend {
     font-family: 'Poppins', sans-serif;
     font-size: var(--second-header);
 }
+
+.popup-header span {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--error-msg);
+} 
 
     label {
         font-family: 'Poppins', sans-serif;

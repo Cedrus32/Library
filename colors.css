@@ -107,6 +107,14 @@ body {
             border-bottom: 1px solid var(--dark);
         }
 
+            div.popup-header {
+                border: none;
+            }
+
+                .popup-header span {
+                    color: red;
+                } 
+
             label {
                 color: rgb(117, 117, 117);
             }

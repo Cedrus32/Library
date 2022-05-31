@@ -201,7 +201,8 @@ main {
 }
 
     form,
-    legend {
+    legend,
+    .popup-header span {
         margin-bottom: var(--half-space);
     }
 
@@ -220,6 +221,17 @@ main {
                 position: relative;
                 width: 100%;
             }
+
+                div.popup-header {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--qrt-space);
+                    margin-bottom: calc(-1 * var(--half-space));
+                }
+
+                    .popup-header span {
+                        height: max-content;
+                    } 
 
                 input {
                     width: 100%;
