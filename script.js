@@ -106,23 +106,6 @@ function setRemoveListener(icon) {
 
 // -------------------- FORM VALIDATION -------------------- //
 
-let inputList = document.querySelectorAll('input');
-let inputArray = Array.from(inputList);
-let validLog = [];
-function isValid(inputValue) {
-    if (!inputValue.validity.valid) {
-        inputValue.setCustomValidity('TEST CUSTOM VALIDITY');
-        validLog.push(inputValue);
-    }
-    return inputValue.validity.valid;
-}
-
-function throwError() {
-    let errorSpan = document.getElementById('error');
-    let errorTarget = validLog[0];
-    console.log(errorSpan);
-    errorSpan.textContent = validLog[0].validationMessage;
-}
 
 
 
@@ -177,16 +160,22 @@ add.addEventListener('click', () => {
 // * makes & adds new book to library
 let confirm = document.getElementById('conf');
 confirm.addEventListener('click', () => {
+    let popupForm = document.querySelector('form');
+    console.log(popupForm.checkValidity());
     // * if all input valid
-    if (inputArray.every(isValid)) {
+    if (popupForm.checkValidity() === true) {
         addBook();
         popup.classList.remove('show');
         refreshDisplay();
         // ! console.log(myLibrary);
-    }
+    } else {
     // * else...
-        // add error message next to popup legend (add div container)
-        throwError();
+        // * throw error
+        console.log('throw error');
+        let pagesTest = document.getElementById('book-pages');
+        let errorMsg = document.getElementById('error');
+        errorMsg.textContent = pagesTest.validationMessage;
+    }
 });
 
 // * cancels input
