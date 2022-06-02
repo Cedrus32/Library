@@ -67,7 +67,6 @@ body {
                     border-bottom: 1px solid var(--accent);
                 }
 
-    /* table body separator & space */
     table td {
         border-top: 1px solid black;
     }
@@ -115,21 +114,20 @@ body {
                     color: red;
                 } 
 
-            label {
-                color: rgb(117, 117, 117);
-            }
-
             input {
                 background-color: transparent;
                 border: none;
                 outline: none;
             }
 
-            input:active:not(:placeholder-shown):invalid + label,
-            input:focus:not(:placeholder-shown):invalid + label,
-            input:focus-visible:not(:placeholder-shown):invalid + label,
-            input:not(:placeholder-shown):invalid + label {
-                /* when input is selected || */
+            label {
+                color: rgb(117, 117, 117);
+            }
+
+            input:not(:placeholder-shown):invalid + label,
+            input:required:placeholder-shown + label,
+            .required {
                 /* NOT showing placeholder text (full) */
+                /* showing placeholder text (empty) */
                 color: red;
             }

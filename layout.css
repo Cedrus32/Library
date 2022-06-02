@@ -216,7 +216,6 @@ main {
         
             fieldset div {
                 display: flex;
-                /* flex-flow: column; */
 
                 position: relative;
                 width: 100%;
@@ -235,20 +234,10 @@ main {
 
                 input {
                     width: 100%;
-                    padding-right: var(--half-space) ;
+                    padding-right: var(--half-space);
                 }
 
                 label {
-                    width: auto;
-                    white-space: nowrap;
-                }
-
-                input:active + label,
-                input:focus + label,
-                input:focus-visible + label,
-                input:not(:placeholder-shown) + label {
-                    /* when input is selected || */
-                    /* NOT showing placeholder text (full) */
                     width: auto;
                     white-space: nowrap;
                 }
