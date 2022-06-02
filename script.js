@@ -106,7 +106,37 @@ function setRemoveListener(icon) {
 
 // -------------------- FORM VALIDATION -------------------- //
 
+function throwError() {
+    // let pagesTest = document.getElementById('book-pages');
+    // let errorMsg = document.getElementById('error');
+    // errorMsg.textContent = pagesTest.validationMessage;
 
+    // X get list of input boxes
+    // X check if each input is valid
+    // * if input is INVALID, display custom error message BELOW LINE
+    // * if error is type mismatch, display error
+    // * else if error is no input, display error
+
+    let inputBoxes = document.querySelectorAll('input');
+    inputBoxes = Array.from(inputBoxes);
+    console.log({inputBoxes});
+    for (input in inputBoxes) {
+        let targetInput = inputBoxes[input];
+        // console.log(targetInput);
+        let inputValid = targetInput.checkValidity();
+        // console.log(inputValid);
+        if (inputValid === false) {
+            // console.log(targetInput.validity.valueMissing);
+            if (targetInput.validity.valueMissing === true) {
+                targetInput.setCustomValidity('Please enter a value');
+                console.log(targetInput.validationMessage);
+            } else if (targetInput.validity.patternMismatch === true) {
+                targetInput.setCustomValidity('Please enter a value of at least 0');
+                console.log(targetInput.validationMessage);
+            }
+        }
+    }
+}
 
 
 // -------------------- ADD SAMPLE BOOKS -------------------- //
@@ -161,20 +191,15 @@ add.addEventListener('click', () => {
 let confirm = document.getElementById('conf');
 confirm.addEventListener('click', () => {
     let popupForm = document.querySelector('form');
-    console.log(popupForm.checkValidity());
-    // * if all input valid
+    // ! console.log(popupForm.checkValidity());
     if (popupForm.checkValidity() === true) {
         addBook();
         popup.classList.remove('show');
         refreshDisplay();
         // ! console.log(myLibrary);
     } else {
-    // * else...
-        // * throw error
-        console.log('throw error');
-        let pagesTest = document.getElementById('book-pages');
-        let errorMsg = document.getElementById('error');
-        errorMsg.textContent = pagesTest.validationMessage;
+        // ! console.log('throw error');
+        throwError();
     }
 });
 
