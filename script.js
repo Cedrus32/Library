@@ -106,37 +106,39 @@ function setRemoveListener(icon) {
 
 // -------------------- FORM VALIDATION -------------------- //
 
-function throwError() {
-    // let pagesTest = document.getElementById('book-pages');
-    // let errorMsg = document.getElementById('error');
-    // errorMsg.textContent = pagesTest.validationMessage;
 
+let inputBoxes;
+function throwError() {
     // X get list of input boxes
     // X check if each input is valid
     // * if input is INVALID, display custom error message BELOW LINE
-    // * if error is type mismatch, display error
-    // * else if error is no input, display error
+    // X if error is type mismatch, display error
+    // X else if error is no input, display error
 
-    let inputBoxes = document.querySelectorAll('input');
+    inputBoxes = document.querySelectorAll('input');
     inputBoxes = Array.from(inputBoxes);
     console.log({inputBoxes});
     for (input in inputBoxes) {
         let targetInput = inputBoxes[input];
-        // console.log(targetInput);
-        let inputValid = targetInput.checkValidity();
-        // console.log(inputValid);
-        if (inputValid === false) {
-            // console.log(targetInput.validity.valueMissing);
-            if (targetInput.validity.valueMissing === true) {
-                targetInput.setCustomValidity('Please enter a value');
-                console.log(targetInput.validationMessage);
-            } else if (targetInput.validity.patternMismatch === true) {
-                targetInput.setCustomValidity('Please enter a value of at least 0');
-                console.log(targetInput.validationMessage);
-            }
+        if (targetInput.validity.valueMissing === true) {
+            targetInput.setCustomValidity('Please enter a value');
+        } else if (targetInput.validity.patternMismatch === true) {
+            targetInput.setCustomValidity('Please enter a value of at least 0');
         }
+        generateErrorMsg(targetInput);
+        let siblingLabel = targetInput.nextElementSibling;
+        siblingLabel.classList.add('error');
     }
 }
+
+function generateErrorMsg(input) {
+    let parentDiv = input.parentElement;
+    let errorMsg = document.createElement('div');
+    errorMsg.classList.add('error');
+    errorMsg.textContent = input.validationMessage;
+    parentDiv.insertBefore(errorMsg, input);
+}
+
 
 
 // -------------------- ADD SAMPLE BOOKS -------------------- //
@@ -199,9 +201,19 @@ confirm.addEventListener('click', () => {
         // ! console.log(myLibrary);
     } else {
         // ! console.log('throw error');
+        // * throw CONFIRM error
         throwError();
     }
 });
+
+// * add event listener on keydown to remove error messages
+// * listen for keydown
+// * check for validity on targetInput
+// * if invalid, throw LIVE error
+// inputBoxes.forEach(box => box.addEventListener('keydown', () => {
+//     console.log('type');
+// }))
+
 
 // * cancels input
 let cancel = document.getElementById('canc');
