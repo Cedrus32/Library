@@ -201,7 +201,6 @@ confirm.addEventListener('click', () => {
         // ! console.log(myLibrary);
     } else {
         // ! console.log('throw error');
-        // * throw CONFIRM error
         throwError();
     }
 });
@@ -210,9 +209,6 @@ confirm.addEventListener('click', () => {
 // * listen for keydown
 // * check for validity on targetInput
 // * if invalid, throw LIVE error
-// inputBoxes.forEach(box => box.addEventListener('keydown', () => {
-//     console.log('type');
-// }))
 
 
 // * cancels input

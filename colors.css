@@ -125,9 +125,8 @@ body {
             }
 
             input:not(:placeholder-shown):invalid + label,
-            input:required:placeholder-shown + label,
-            .required {
+            .error {
                 /* NOT showing placeholder text (full) */
-                /* showing placeholder text (empty) */
+                /* error class */
                 color: red;
             }

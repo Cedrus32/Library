@@ -232,23 +232,34 @@ main {
                         height: max-content;
                     } 
 
-                input {
-                    width: 100%;
-                    padding-right: var(--half-space);
+                div.field {
+                    position: relative;
                 }
 
-                label {
-                    width: auto;
-                    white-space: nowrap;
-                }
+                    input {
+                        position: relative;
+                        width: 100%;
+                        padding-right: var(--half-space);
+                    }
 
-                input:placeholder-shown + label {
-                    /* showing placeholder text (empty) */
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    z-index: -1;
-                }
+                        .error {
+                            /* position: absolute;
+                            top: -100px; left: -100px;
+                            z-index: -10; */
+                        }
+
+                    label {
+                        width: auto;
+                        white-space: nowrap;
+                    }
+
+                    input:placeholder-shown + label {
+                        /* showing placeholder text (empty) */
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        z-index: -1;
+                    }
 
 .add,
 .canc-conf {
