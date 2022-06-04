@@ -31,7 +31,6 @@ function addBook() {
 // -------------------- ADD/REFRESH -------------------- //
 
 let table = document.querySelector('tbody');
-
 function displayLibrary(myLibrary) {
     for (let book in myLibrary) {
         let row = document.createElement('tr');
@@ -108,61 +107,35 @@ function setRemoveListener(icon) {
 // -------------------- FORM VALIDATION -------------------- //
 
 
-let inputBoxes = document.querySelectorAll('input');
+let inputBoxes;
+function throwError() {
+    // X get list of input boxes
+    // X check if each input is valid
+    // * if input is INVALID, display custom error message BELOW LINE
+    // X if error is type mismatch, display error
+    // X else if error is no input, display error
 
-function throwMissingValueError() {
     inputBoxes = document.querySelectorAll('input');
     inputBoxes = Array.from(inputBoxes);
-    for (targetInput in inputBoxes) {
-        let input = inputBoxes[targetInput];
-        if (input.validity.valueMissing === true) {
-            generateErrorMsg(input);
+    console.log({inputBoxes});
+    for (input in inputBoxes) {
+        let targetInput = inputBoxes[input];
+        if (targetInput.validity.valueMissing === true) {
+            targetInput.setCustomValidity('Please enter a value');
+        } else if (targetInput.validity.patternMismatch === true) {
+            targetInput.setCustomValidity('Please enter a value of at least 0');
         }
-    }
-}
-
-function setCustomError(input) {
-    // ? remove input.validity.valueMissing ? //
-    console.log(input.checkValidity());
-    console.log(input.validity);
-    if ((input.checkValidity() === true) || (input.validity.valueMissing === true)) {
-        removeErrorMsg(input);
-    } else if ((input.validity.patternMismatch === true)) {
-        generateErrorMsg(input);
+        generateErrorMsg(targetInput);
     }
 }
 
 function generateErrorMsg(input) {
-    if (input.validity.patternMismatch === true) {
-        input.setCustomValidity('Please enter a value of at least 0');
-    } else if (input.validity.missingValue === true) {
-        input.setCustomValidity('Please enter a value');
-    }
-    
     let parentDiv = input.parentElement;
     let errorMsg = document.createElement('div');
     errorMsg.classList.add('error');
     errorMsg.textContent = input.validationMessage;
     parentDiv.insertBefore(errorMsg, input);
 }
-
-function removeErrorMsg(input) {
-    // console.log('enter removeErrorMsg');
-    input.setCustomValidity('');
-    let errorMsg = input.previousSibling;
-    errorMsg.remove();
-}
-
-// X add event listener on keydown to remove error messages
-// X check for validity on targetInput
-// X if invalid, throw LIVE error
-// * if valid, remove any custom validations
-
-// * check for change in validity on input event
-inputBoxes.forEach(targetInput => targetInput.addEventListener('input', () => {
-    // console.log(inputData.checkValidity());
-    setCustomError(targetInput);
-}));
 
 
 
@@ -198,7 +171,6 @@ function createSampleBooks(sampleBooks) {
     }
 }
 
-// * populate table with samples
 createSampleBooks(sampleBooks);
 displayLibrary(myLibrary);
 
@@ -206,19 +178,17 @@ displayLibrary(myLibrary);
 
 // -------------------- BUTTON FUNCTIONALITY -------------------- //
 
-let add = document.getElementById('add');
-let popup = document.querySelector('.popup');
-let confirm = document.getElementById('conf');
-let cancel = document.getElementById('canc');
-
 // * remove functionality set when generating table ^^^
 
 // * brings popup form
+let add = document.getElementById('add');
+let popup = document.querySelector('.popup');
 add.addEventListener('click', () => {
     popup.classList.add('show');
 });
 
 // * makes & adds new book to library
+let confirm = document.getElementById('conf');
 confirm.addEventListener('click', () => {
     let popupForm = document.querySelector('form');
     // ! console.log(popupForm.checkValidity());
@@ -228,12 +198,19 @@ confirm.addEventListener('click', () => {
         refreshDisplay();
         // ! console.log(myLibrary);
     } else {
-        throwMissingValueError();
+        // ! console.log('throw error');
+        throwError();
     }
 });
 
+// * add event listener on keydown to remove error messages
+// * listen for keydown
+// * check for validity on targetInput
+// * if invalid, throw LIVE error
+
+
 // * cancels input
+let cancel = document.getElementById('canc');
 cancel.addEventListener('click', () => {
-    // * clear form...
     popup.classList.remove('show');
 });
