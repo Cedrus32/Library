@@ -126,8 +126,6 @@ function throwError() {
             targetInput.setCustomValidity('Please enter a value of at least 0');
         }
         generateErrorMsg(targetInput);
-        let siblingLabel = targetInput.nextElementSibling;
-        siblingLabel.classList.add('error');
     }
 }
 
