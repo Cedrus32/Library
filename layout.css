@@ -213,53 +213,38 @@ main {
             gap: var(--half-space);
             width: clamp(300px, 60vw, 600px);
         }
-        
-            fieldset div {
-                display: flex;
 
+            .field {
+                display: flex;
                 position: relative;
                 width: 100%;
             }
 
-                div.popup-header {
-                    display: flex;
-                    align-items: center;
-                    gap: var(--qrt-space);
-                    margin-bottom: calc(-1 * var(--half-space));
+                input {
+                    width: 100%;
+                    padding-right: var(--half-space);
                 }
 
-                    .popup-header span {
-                        height: max-content;
-                    } 
-
-                div.field {
-                    position: relative;
+                label {
+                    width: auto;
+                    white-space: nowrap;
                 }
 
-                    input {
-                        position: relative;
-                        width: 100%;
-                        padding-right: var(--half-space);
-                    }
+                input:placeholder-shown + label {
+                    /* showing placeholder text (empty) */
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: -1;
+                }
 
-                        .error {
-                            /* position: absolute;
-                            top: -100px; left: -100px;
-                            z-index: -10; */
-                        }
-
-                    label {
-                        width: auto;
-                        white-space: nowrap;
-                    }
-
-                    input:placeholder-shown + label {
-                        /* showing placeholder text (empty) */
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        z-index: -1;
-                    }
+            .error {
+                position: absolute;
+                /* top: -50px; left: -50px; */
+                top: 100%;
+                /* transform: translateY(-50%); */
+                z-index: -1;
+            }
 
 .add,
 .canc-conf {

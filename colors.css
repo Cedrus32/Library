@@ -90,8 +90,9 @@ body {
 }
 
 .popup.show + .show-filter {
-    background-color: var(--dark);
-    filter: opacity(0.5);
+    background-color: var(--light);
+    /* background-color: var(--dark); */
+    /* filter: opacity(0.5); */
 }
 
     fieldset {
@@ -102,17 +103,9 @@ body {
             color: var(--accent);
         }
 
-        fieldset div {
+        .field {
             border-bottom: 1px solid var(--dark);
         }
-
-            div.popup-header {
-                border: none;
-            }
-
-                .popup-header span {
-                    color: red;
-                } 
 
             input {
                 background-color: transparent;
