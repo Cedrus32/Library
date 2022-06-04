@@ -121,13 +121,13 @@ function throwMissingValueError() {
     }
 }
 
-function setCustomError(input) {
-    // ? remove input.validity.valueMissing ? //
-    console.log(input.checkValidity());
-    console.log(input.validity);
-    if ((input.checkValidity() === true) || (input.validity.valueMissing === true)) {
+function updateCustomError(input) {
+    if ((input.checkValidity() === true) || (input.validity.valueMissing === true) || ((input.validity.customError === true) && (input.validity.valueMissing === false))) {
+        //          input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
         removeErrorMsg(input);
-    } else if ((input.validity.patternMismatch === true)) {
+    }
+    
+    if ((input.validity.patternMismatch === true)) {
         generateErrorMsg(input);
     }
 }
@@ -135,7 +135,7 @@ function setCustomError(input) {
 function generateErrorMsg(input) {
     if (input.validity.patternMismatch === true) {
         input.setCustomValidity('Please enter a value of at least 0');
-    } else if (input.validity.missingValue === true) {
+    } else if (input.validity.valueMissing === true) {
         input.setCustomValidity('Please enter a value');
     }
     
@@ -147,7 +147,6 @@ function generateErrorMsg(input) {
 }
 
 function removeErrorMsg(input) {
-    // console.log('enter removeErrorMsg');
     input.setCustomValidity('');
     let errorMsg = input.previousSibling;
     errorMsg.remove();
@@ -158,10 +157,9 @@ function removeErrorMsg(input) {
 // X if invalid, throw LIVE error
 // * if valid, remove any custom validations
 
-// * check for change in validity on input event
+// * update input validity live
 inputBoxes.forEach(targetInput => targetInput.addEventListener('input', () => {
-    // console.log(inputData.checkValidity());
-    setCustomError(targetInput);
+    updateCustomError(targetInput);
 }));
 
 
