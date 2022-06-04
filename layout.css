@@ -240,9 +240,7 @@ main {
 
             .error {
                 position: absolute;
-                /* top: -50px; left: -50px; */
                 top: 100%;
-                /* transform: translateY(-50%); */
                 z-index: -1;
             }
 
