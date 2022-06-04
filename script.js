@@ -16,7 +16,7 @@ function makeBook() {
     let bookPages = document.getElementById('book-pages').value;
     let bookStatus = document.getElementById('book-status').value;
     bookID = bookID++;
-
+    
     let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus, bookID);
     return newBook;
 }
@@ -123,7 +123,7 @@ function throwMissingValueError() {
 
 function updateCustomError(input) {
     if ((input.checkValidity() === true) || (input.validity.valueMissing === true) || ((input.validity.customError === true) && (input.validity.valueMissing === false))) {
-        //          input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
+        // *        input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
         removeErrorMsg(input);
     }
     
@@ -152,10 +152,10 @@ function removeErrorMsg(input) {
     errorMsg.remove();
 }
 
-// X add event listener on keydown to remove error messages
-// X check for validity on targetInput
-// X if invalid, throw LIVE error
-// * if valid, remove any custom validations
+function scrubErrors() {
+    let errorMsgs = document.querySelectorAll('div.error');
+    errorMsgs.forEach(error => error.remove());
+}
 
 // * update input validity live
 inputBoxes.forEach(targetInput => targetInput.addEventListener('input', () => {
@@ -208,6 +208,7 @@ let add = document.getElementById('add');
 let popup = document.querySelector('.popup');
 let confirm = document.getElementById('conf');
 let cancel = document.getElementById('canc');
+let form = document.getElementById('form');
 
 // * remove functionality set when generating table ^^^
 
@@ -228,10 +229,12 @@ confirm.addEventListener('click', () => {
     } else {
         throwMissingValueError();
     }
+    form.reset();
 });
 
 // * cancels input
 cancel.addEventListener('click', () => {
-    // * clear form...
+    form.reset();
+    scrubErrors();
     popup.classList.remove('show');
 });
