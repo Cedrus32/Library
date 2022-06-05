@@ -14,7 +14,7 @@ function makeBook() {
     let bookTitle = document.getElementById('book-title').value;
     let bookAuthor = document.getElementById('book-author').value;
     let bookPages = document.getElementById('book-pages').value;
-    let bookStatus = document.getElementById('book-status').value;
+    let bookStatus = document.querySelector('input[type="radio"]:checked').value;
     bookID = bookID++;
     
     let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus, bookID);
