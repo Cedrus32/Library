@@ -108,12 +108,23 @@
                                placeholder=' '>
                         <label for='book-pages' aria-label='Enter Number of Pages'># Pages *</label>
                     </div>
-                    <div class='field'>
+                    <div class='status-input'>
                         <!-- generate error -->
-                        <input type='text' id='book-status' name='status'
-                               aria-required='true' required
-                               placeholder=' '>
-                        <label for='book-status' aria-label='Select Whether Book is Unread, Reading, or Read'>Status *</label>
+                        <span aria-label='Select Whether Book is Unread, Reading, or Read'>Status *</span>
+                        <div class='status-choices'>
+                            <div>
+                                <input type='radio' id='unread' name='status' value='unread'>
+                                <label for='unread' aria-label='unread'>unread</label>
+                            </div>
+                            <div>
+                                <input type='radio' id='reading' name='status' value='reading'>
+                                <label for='reading' aria-label='reading'>reading</label>
+                            </div>
+                            <div>
+                                <input type='radio' id='read' name='status' value='read'>
+                                <label for='read' aria-label='read'>read</label>
+                            </div>
+                        </div>
                     </div>                    
                 </fieldset>
             </form>

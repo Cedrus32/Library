@@ -1,6 +1,7 @@
 :root {
     --light: #E0E0E0;
     --dark: #212121;
+    --mid: #757575;
     --accent: #0433FF;
 
     --thick: 4px;
@@ -106,14 +107,17 @@ body {
             border-bottom: 1px solid var(--dark);
         }
 
-            input {
+            input,
+            .status-input label {
                 background-color: transparent;
                 border: none;
                 outline: none;
+                color: var(--dark);
             }
 
-            label {
-                color: rgb(117, 117, 117);
+            label,
+            .status-input span {
+                color: var(--mid);
             }
 
             input:not(:placeholder-shown):invalid + label,

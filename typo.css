@@ -79,21 +79,28 @@ legend {
     font-size: var(--second-header);
 }
 
+input,
+input:active,
+input:focus,
+input:focus-visible,
+.status-input label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--base);
+    line-height: 1.5rem;
+}
+
+label,
+.status-input span {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(---base);
+    letter-spacing: 0.05em;
+}
+
+.status-input span {
+    white-space: nowrap;
+}
+
 .error {
     font-family: 'Poppins', sans-serif;
     font-size: var(--base);
-} 
-
-    label {
-        font-family: 'Poppins', sans-serif;
-        font-size: var(---base);
-        letter-spacing: 0.05em;
-    }
-
-    input,
-    input:active,
-    input:focus,
-    input:focus-visible {
-        font-size: var(--base);
-        line-height: 1.5rem;
-    }
+}

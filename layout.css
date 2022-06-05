@@ -214,13 +214,14 @@ main {
             width: clamp(300px, 60vw, 600px);
         }
 
-            .field {
+            .field,
+            .status-input {
                 display: flex;
                 position: relative;
                 width: 100%;
             }
 
-                input {
+                input[type='text'] {
                     width: 100%;
                     padding-right: var(--half-space);
                 }
@@ -237,6 +238,25 @@ main {
                     transform: translateY(-50%);
                     z-index: -1;
                 }
+
+                .status-input {
+                    display: flex;
+                    align-items: center;
+                    /* border: 1px solid green; */
+                }
+
+                    .status-choices {
+                        display: flex;
+                        justify-content: space-around;
+                        width: 100%;
+                        /* border: 1px solid red; */
+                    }
+
+                        .status-choices div {
+                            display: flex;
+                            align-items: center;
+                            gap: var(--small-space);
+                        }
 
             .error {
                 position: absolute;
