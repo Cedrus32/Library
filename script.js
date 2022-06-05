@@ -108,29 +108,26 @@ function setRemoveListener(icon) {
 // -------------------- FORM VALIDATION -------------------- //
 
 
-let inputBoxes = document.querySelectorAll('input');
-let radioArray = [];
+let inputBoxes = document.querySelectorAll('input[type="text"]');
+let radioButtons = document.querySelectorAll('input[type="radio"]');
 
 function throwMissingValueError() {
-    inputBoxes = document.querySelectorAll('input');
+    inputBoxes = document.querySelectorAll('input[type="text"]');
     inputBoxes = Array.from(inputBoxes);
-    // console.log(inputBoxes);
-    // * cycle through inputBoxes
+    radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons = Array.from(radioButtons);
+
+    // * cycle through input data
     for (targetInput in inputBoxes) {
         let input = inputBoxes[targetInput];
-        if (targetInput < 3) {
-            if (input.validity.valueMissing === true) {
-                generateErrorMsg(input);
-            }
-        } else if (targetInput >= 3) {
-            radioArray.push(input);
+        if (input.validity.valueMissing === true) {
+            generateErrorMsg(input);
         }
     }
-
-    if (!radioArray.every(radioChecked)) {
+    if (!radioButtons.every(radioChecked)) {
         console.log('all buttons unchecked');
 
-        generateErrorMsg(radioArray[0]);
+        generateErrorMsg(radioButtons[0]);
     }
 }
 
@@ -139,6 +136,7 @@ function radioChecked(button) {
 }
 
 function updateCustomError(input) {
+    console.log(radioArray);
     if ((input.checkValidity() === true) || (input.validity.valueMissing === true) || ((input.validity.customError === true) && (input.validity.valueMissing === false))) {
         // *        input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
         removeErrorMsg(input);

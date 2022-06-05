@@ -242,14 +242,12 @@ main {
                 .status-input {
                     display: flex;
                     align-items: center;
-                    /* border: 1px solid green; */
                 }
 
                     .status-choices {
                         display: flex;
                         justify-content: space-around;
                         width: 100%;
-                        /* border: 1px solid red; */
                     }
 
                         .status-choices div {

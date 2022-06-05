@@ -120,7 +120,7 @@ body {
                 color: var(--mid);
             }
 
-            input:not(:placeholder-shown):invalid + label,
+            input[type='text']:not(:placeholder-shown):invalid + label,
             .error {
                 /* NOT showing placeholder text (full) */
                 /* error class */
