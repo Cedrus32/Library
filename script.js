@@ -109,16 +109,33 @@ function setRemoveListener(icon) {
 
 
 let inputBoxes = document.querySelectorAll('input');
+let radioArray = [];
 
 function throwMissingValueError() {
     inputBoxes = document.querySelectorAll('input');
     inputBoxes = Array.from(inputBoxes);
+    // console.log(inputBoxes);
+    // * cycle through inputBoxes
     for (targetInput in inputBoxes) {
         let input = inputBoxes[targetInput];
-        if (input.validity.valueMissing === true) {
-            generateErrorMsg(input);
+        if (targetInput < 3) {
+            if (input.validity.valueMissing === true) {
+                generateErrorMsg(input);
+            }
+        } else if (targetInput >= 3) {
+            radioArray.push(input);
         }
     }
+
+    if (!radioArray.every(radioChecked)) {
+        console.log('all buttons unchecked');
+
+        generateErrorMsg(radioArray[0]);
+    }
+}
+
+function radioChecked(button) {
+    return button.checked;
 }
 
 function updateCustomError(input) {
@@ -133,17 +150,25 @@ function updateCustomError(input) {
 }
 
 function generateErrorMsg(input) {
+    let parentDiv = input.parentElement;
     if (input.validity.patternMismatch === true) {
         input.setCustomValidity('Please enter a value of at least 0');
     } else if (input.validity.valueMissing === true) {
         input.setCustomValidity('Please enter a value');
+    } else if (input.type === 'radio') {
+        input.setCustomValidity('Please select book status');
+        parentDiv = document.querySelector('div.status-input');
+        console.log(parentDiv);
     }
-    
-    let parentDiv = input.parentElement;
+
     let errorMsg = document.createElement('div');
     errorMsg.classList.add('error');
     errorMsg.textContent = input.validationMessage;
-    parentDiv.insertBefore(errorMsg, input);
+    if (input.type === 'radio') {
+        parentDiv.insertBefore(errorMsg, parentDiv.firstChild);
+    } else {
+        parentDiv.insertBefore(errorMsg, input);
+    }
 }
 
 function removeErrorMsg(input) {
