@@ -125,8 +125,6 @@ function throwMissingValueError() {
         }
     }
     if (!radioButtons.every(radioChecked)) {
-        console.log('all buttons unchecked');
-
         generateErrorMsg(radioButtons[0]);
     }
 }
@@ -136,8 +134,7 @@ function radioChecked(button) {
 }
 
 function updateCustomError(input) {
-    console.log(radioArray);
-    if ((input.checkValidity() === true) || (input.validity.valueMissing === true) || ((input.validity.customError === true) && (input.validity.valueMissing === false))) {
+    if ((input[type='radio']) || (input.checkValidity() === true) || (input.validity.valueMissing === true) || ((input.validity.customError === true) && (input.validity.valueMissing === false))) {
         // *        input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
         removeErrorMsg(input);
     }
@@ -156,7 +153,6 @@ function generateErrorMsg(input) {
     } else if (input.type === 'radio') {
         input.setCustomValidity('Please select book status');
         parentDiv = document.querySelector('div.status-input');
-        console.log(parentDiv);
     }
 
     let errorMsg = document.createElement('div');
@@ -170,8 +166,14 @@ function generateErrorMsg(input) {
 }
 
 function removeErrorMsg(input) {
+    let errorMsg;
     input.setCustomValidity('');
-    let errorMsg = input.previousSibling;
+    if (input.type === 'radio') {
+        let parentDiv = document.querySelector('div.status-input');
+        errorMsg = parentDiv.firstChild;
+    } else {
+        errorMsg = input.previousSibling;
+    }
     errorMsg.remove();
 }
 
@@ -183,6 +185,9 @@ function scrubErrors() {
 // * update input validity live
 inputBoxes.forEach(targetInput => targetInput.addEventListener('input', () => {
     updateCustomError(targetInput);
+}));
+radioButtons.forEach(targetButton => targetButton.addEventListener('change', () => {
+    updateCustomError(targetButton);
 }));
 
 
