@@ -110,6 +110,8 @@ function setRemoveListener(icon) {
 
 let inputBoxes = document.querySelectorAll('input[type="text"]');
 let radioButtons = document.querySelectorAll('input[type="radio"]');
+console.log(inputBoxes[0].validity);
+console.log(radioButtons[0].validity);
 
 function throwMissingValueError() {
     inputBoxes = document.querySelectorAll('input[type="text"]');
@@ -117,15 +119,23 @@ function throwMissingValueError() {
     radioButtons = document.querySelectorAll('input[type="radio"]');
     radioButtons = Array.from(radioButtons);
 
-    // * cycle through input data
+    // * check text boxes
     for (targetInput in inputBoxes) {
         let input = inputBoxes[targetInput];
-        if (input.validity.valueMissing === true) {
-            generateErrorMsg(input);
+        if (input.customError === false) {
+            if (input.validity.valueMissing === true) {
+                generateErrorMsg(input);
+            }
         }
     }
-    if (!radioButtons.every(radioChecked)) {
-        generateErrorMsg(radioButtons[0]);
+
+    // * check radio buttons
+    // console.log(radioButtons);
+    // console.log(radioButtons.every(radioChecked));
+    if (radioButtons[0].customError === false) {
+        if (radioButtons.some(radioChecked) === false) {
+            generateErrorMsg(radioButtons[0]);
+        }
     }
 }
 
@@ -151,6 +161,7 @@ function generateErrorMsg(input) {
     } else if (input.validity.valueMissing === true) {
         input.setCustomValidity('Please enter a value');
     } else if (input.type === 'radio') {
+        input = document.getElementById('unread');
         input.setCustomValidity('Please select book status');
         parentDiv = document.querySelector('div.status-input');
     }
@@ -167,11 +178,13 @@ function generateErrorMsg(input) {
 
 function removeErrorMsg(input) {
     let errorMsg;
-    input.setCustomValidity('');
     if (input.type === 'radio') {
-        let parentDiv = document.querySelector('div.status-input');
-        errorMsg = parentDiv.firstChild;
+        input = document.getElementById('unread');
+        input.setCustomValidity('');
+        // let parentDiv = document.querySelector('div.status-input');
+        errorMsg = document.querySelector('div.status-input div.error');
     } else {
+        input.setCustomValidity('');
         errorMsg = input.previousSibling;
     }
     errorMsg.remove();
@@ -187,7 +200,10 @@ inputBoxes.forEach(targetInput => targetInput.addEventListener('input', () => {
     updateCustomError(targetInput);
 }));
 radioButtons.forEach(targetButton => targetButton.addEventListener('change', () => {
-    updateCustomError(targetButton);
+    let unreadButton = document.getElementById('unread');
+    if ((targetButton.checked === true) && (unreadButton.validity.customError === true)) {
+        updateCustomError(targetButton);
+    }
 }));
 
 
@@ -254,10 +270,10 @@ confirm.addEventListener('click', () => {
         popup.classList.remove('show');
         refreshDisplay();
         // ! console.log(myLibrary);
+        form.reset();
     } else {
         throwMissingValueError();
     }
-    form.reset();
 });
 
 // * cancels input
