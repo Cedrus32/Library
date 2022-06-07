@@ -110,8 +110,6 @@ function setRemoveListener(icon) {
 
 let inputBoxes = document.querySelectorAll('input[type="text"]');
 let radioButtons = document.querySelectorAll('input[type="radio"]');
-console.log(inputBoxes[0].validity);
-console.log(radioButtons[0].validity);
 
 function throwMissingValueError() {
     inputBoxes = document.querySelectorAll('input[type="text"]');
@@ -119,10 +117,13 @@ function throwMissingValueError() {
     radioButtons = document.querySelectorAll('input[type="radio"]');
     radioButtons = Array.from(radioButtons);
 
+    console.log(inputBoxes[0].validity.customError);
+    console.log(radioButtons[0].validity.customError);
+
     // * check text boxes
     for (targetInput in inputBoxes) {
         let input = inputBoxes[targetInput];
-        if (input.customError === false) {
+        if (input.validity.customError === false) {
             if (input.validity.valueMissing === true) {
                 generateErrorMsg(input);
             }
@@ -132,7 +133,7 @@ function throwMissingValueError() {
     // * check radio buttons
     // console.log(radioButtons);
     // console.log(radioButtons.every(radioChecked));
-    if (radioButtons[0].customError === false) {
+    if (radioButtons[0].validity.customError === false) {
         if (radioButtons.some(radioChecked) === false) {
             generateErrorMsg(radioButtons[0]);
         }
