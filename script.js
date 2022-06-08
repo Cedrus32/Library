@@ -28,6 +28,39 @@ function addBook() {
 
 
 
+// -------------------- STATS BAR -------------------- //
+
+let statsBoxes = document.querySelectorAll('div.stats-box');
+let totalBooks = document.getElementById('num-books');
+let booksRead = document.getElementById('books-read');
+let pagesRead = document.getElementById('pages-read');
+console.log(statsBoxes);
+console.log(totalBooks);
+console.log(booksRead);
+console.log(pagesRead);
+
+function getTotalBooks() {
+    // query length of table
+    // return quantity
+}
+
+function getBooksRead() {
+    // query books with status "read"
+    // return quantity
+}
+
+function getPagesRead() {
+    // query books with status "read"
+    // run through books, sum pages
+    // return quantity
+}
+
+function updateStat(statBox, data) {
+    // update statBox textContent with data
+}
+
+
+
 // -------------------- ADD/REFRESH -------------------- //
 
 let table = document.querySelector('tbody');
@@ -269,7 +302,6 @@ add.addEventListener('click', () => {
 confirm.addEventListener('click', () => {
     let popupForm = document.querySelector('form');
     getRadioButtons();
-    console.log(radioButtons.some(radioChecked));
     // ! console.log(popupForm.checkValidity());
     
     if ((popupForm.checkValidity() === true) && (radioButtons.some(radioChecked) === true)) {
