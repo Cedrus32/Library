@@ -111,11 +111,19 @@ function setRemoveListener(icon) {
 let inputBoxes = document.querySelectorAll('input[type="text"]');
 let radioButtons = document.querySelectorAll('input[type="radio"]');
 
-function throwMissingValueError() {
-    inputBoxes = document.querySelectorAll('input[type="text"]');
-    inputBoxes = Array.from(inputBoxes);
+function getRadioButtons() {
     radioButtons = document.querySelectorAll('input[type="radio"]');
     radioButtons = Array.from(radioButtons);
+}
+
+function getInputBoxes() {
+    inputBoxes = document.querySelectorAll('input[type="text"]');
+    inputBoxes = Array.from(inputBoxes);
+}
+
+function throwMissingValueError() {
+    getInputBoxes();
+    getRadioButtons();
 
     // * check text boxes
     for (targetInput in inputBoxes) {
@@ -260,8 +268,7 @@ add.addEventListener('click', () => {
 // * makes & adds new book to library
 confirm.addEventListener('click', () => {
     let popupForm = document.querySelector('form');
-    radioButtons = document.querySelectorAll('input[type="radio"]');
-    radioButtons = Array.from(radioButtons);
+    getRadioButtons();
     console.log(radioButtons.some(radioChecked));
     // ! console.log(popupForm.checkValidity());
     
