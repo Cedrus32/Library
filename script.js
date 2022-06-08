@@ -117,9 +117,6 @@ function throwMissingValueError() {
     radioButtons = document.querySelectorAll('input[type="radio"]');
     radioButtons = Array.from(radioButtons);
 
-    console.log(inputBoxes[0].validity.customError);
-    console.log(radioButtons[0].validity.customError);
-
     // * check text boxes
     for (targetInput in inputBoxes) {
         let input = inputBoxes[targetInput];
@@ -131,8 +128,6 @@ function throwMissingValueError() {
     }
 
     // * check radio buttons
-    // console.log(radioButtons);
-    // console.log(radioButtons.every(radioChecked));
     if (radioButtons[0].validity.customError === false) {
         if (radioButtons.some(radioChecked) === false) {
             generateErrorMsg(radioButtons[0]);
@@ -265,8 +260,12 @@ add.addEventListener('click', () => {
 // * makes & adds new book to library
 confirm.addEventListener('click', () => {
     let popupForm = document.querySelector('form');
+    radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons = Array.from(radioButtons);
+    console.log(radioButtons.some(radioChecked));
     // ! console.log(popupForm.checkValidity());
-    if (popupForm.checkValidity() === true) {
+    
+    if ((popupForm.checkValidity() === true) && (radioButtons.some(radioChecked) === true)) {
         addBook();
         popup.classList.remove('show');
         refreshDisplay();
