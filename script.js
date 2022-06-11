@@ -320,22 +320,15 @@ function checkRead(row) {
 }
 
 function getPagesRead() {
-    // query books with status "read"
-    // run through books, sum pages
-    // return quantity
-
-    // let pages = document.querySelectorAll('tdbody tr:nth-child(3)');
-    // pages = Array.from(pages);
-    // let pagesLength = pages.length;
-    // let numPages = 0;
-    // for (let i = 0; i < pagesLength; i++) {
-    //     numPages += pages[i];
-    // }
-    // return numPages;
-}
-
-function updateStat(statBox, data) {
-    // update statBox textContent with data
+    let numPages = 0;
+    for (let row in rows) {
+        let status = rows[row].childNodes[3].textContent;
+        if (status === 'read') {
+            let pages = parseInt(rows[row].childNodes[2].textContent);
+            numPages += pages;
+        }
+    }
+    return numPages;
 }
 
 // set stat display for each
@@ -345,3 +338,12 @@ totalBooks.textContent = numBooks;
 
 let numRead = getBooksRead();
 booksRead.textContent = numRead;
+
+let numPages = getPagesRead();
+pagesRead.textContent = numPages;
+
+function updateStat(statBox, data) {
+    // update statBox textContent with data
+    // if confirm, add book data
+    // if delete, remove book data
+}
