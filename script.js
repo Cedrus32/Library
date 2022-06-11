@@ -28,39 +28,6 @@ function addBook() {
 
 
 
-// -------------------- STATS BAR -------------------- //
-
-let statsBoxes = document.querySelectorAll('div.stats-box');
-let totalBooks = document.getElementById('num-books');
-let booksRead = document.getElementById('books-read');
-let pagesRead = document.getElementById('pages-read');
-console.log(statsBoxes);
-console.log(totalBooks);
-console.log(booksRead);
-console.log(pagesRead);
-
-function getTotalBooks() {
-    // query length of table
-    // return quantity
-}
-
-function getBooksRead() {
-    // query books with status "read"
-    // return quantity
-}
-
-function getPagesRead() {
-    // query books with status "read"
-    // run through books, sum pages
-    // return quantity
-}
-
-function updateStat(statBox, data) {
-    // update statBox textContent with data
-}
-
-
-
 // -------------------- ADD/REFRESH -------------------- //
 
 let table = document.querySelector('tbody');
@@ -135,6 +102,44 @@ function setRemoveListener(icon) {
         // ! console.log(myLibrary);
     })
 }
+
+
+
+// -------------------- ADD SAMPLE BOOKS -------------------- //
+
+sampleBooks = ['Dune, Frank Herbert, 685, read',
+               'Outlander, Diana Gabaldon, 850, read',
+               'Shadow and Bone, Leigh Bardugo, 358, read',
+               'Gyo, Ito Junji, 400, unread',
+               'Shadow & Claw, Gene Wolfe, 413, unread',
+               'Darker Shades of Magic, V.E. Schwab, 400, read',
+               'Sarum, Edward Rutherford, 912, read',
+               'American Gods, Neil Gaiman, 635, unread',
+               'Lirael, Garth Nix, 464, reading',
+               'Sabriel, Garth Nix, 491, read',
+              ]
+
+function createSampleBooks(sampleBooks) {
+    for (let book in sampleBooks) {
+        // * read through book, split @ ', '
+        let splitBook = sampleBooks[book].split(', ');
+        // * assign to title, author, pages, status
+        let title = splitBook[0];
+        let author = splitBook[1];
+        let pages = splitBook[2];
+        let status = splitBook[3];
+        let id = bookID;
+        // * create new Book instance
+        let newBook = new Book(title, author, pages, status, id);
+        // * push to library
+        myLibrary.push(newBook);
+        bookID++;
+    }
+}
+
+// * populate table with samples
+createSampleBooks(sampleBooks);
+displayLibrary(myLibrary);
 
 
 
@@ -245,44 +250,6 @@ radioButtons.forEach(targetButton => targetButton.addEventListener('change', () 
 
 
 
-// -------------------- ADD SAMPLE BOOKS -------------------- //
-
-sampleBooks = ['Dune, Frank Herbert, 685, read',
-               'Outlander, Diana Gabaldon, 850, read',
-               'Shadow and Bone, Leigh Bardugo, 358, read',
-               'Gyo, Ito Junji, 400, unread',
-               'Shadow & Claw, Gene Wolfe, 413, unread',
-               'Darker Shades of Magic, V.E. Schwab, 400, read',
-               'Sarum, Edward Rutherford, 912, read',
-               'American Gods, Neil Gaiman, 635, unread',
-               'Lirael, Garth Nix, 464, reading',
-               'Sabriel, Garth Nix, 491, read',
-              ]
-
-function createSampleBooks(sampleBooks) {
-    for (let book in sampleBooks) {
-        // * read through book, split @ ', '
-        let splitBook = sampleBooks[book].split(', ');
-        // * assign to title, author, pages, status
-        let title = splitBook[0];
-        let author = splitBook[1];
-        let pages = splitBook[2];
-        let status = splitBook[3];
-        let id = bookID;
-        // * create new Book instance
-        let newBook = new Book(title, author, pages, status, id);
-        // * push to library
-        myLibrary.push(newBook);
-        bookID++;
-    }
-}
-
-// * populate table with samples
-createSampleBooks(sampleBooks);
-displayLibrary(myLibrary);
-
-
-
 // -------------------- BUTTON FUNCTIONALITY -------------------- //
 
 let add = document.getElementById('add');
@@ -321,3 +288,60 @@ cancel.addEventListener('click', () => {
     scrubErrors();
     popup.classList.remove('show');
 });
+
+
+
+// -------------------- STATS BAR -------------------- //
+
+let statsBoxes = document.querySelectorAll('div.stats-box');
+let rows = Array.from(document.querySelectorAll('tbody tr'));
+let totalBooks = document.getElementById('num-books');
+let booksRead = document.getElementById('books-read');
+let pagesRead = document.getElementById('pages-read');
+// console.log(statsBoxes);
+// console.log(totalBooks);
+// console.log(booksRead);
+// console.log(pagesRead);
+
+function getTotalBooks() {
+    let numBooks = rows.length;
+    return numBooks;
+}
+
+function getBooksRead() {
+    let read = rows.filter(checkRead);
+    let numRead = read.length;
+    return numRead;
+}
+
+function checkRead(row) {
+    let status = row.childNodes[3];
+    return status.textContent === 'read';
+}
+
+function getPagesRead() {
+    // query books with status "read"
+    // run through books, sum pages
+    // return quantity
+
+    // let pages = document.querySelectorAll('tdbody tr:nth-child(3)');
+    // pages = Array.from(pages);
+    // let pagesLength = pages.length;
+    // let numPages = 0;
+    // for (let i = 0; i < pagesLength; i++) {
+    //     numPages += pages[i];
+    // }
+    // return numPages;
+}
+
+function updateStat(statBox, data) {
+    // update statBox textContent with data
+}
+
+// set stat display for each
+// set event listener for table change
+let numBooks = getTotalBooks();
+totalBooks.textContent = numBooks;
+
+let numRead = getBooksRead();
+booksRead.textContent = numRead;
