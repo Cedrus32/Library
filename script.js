@@ -105,6 +105,44 @@ function setRemoveListener(icon) {
 
 
 
+// -------------------- ADD SAMPLE BOOKS -------------------- //
+
+sampleBooks = ['Dune, Frank Herbert, 685, read',
+               'Outlander, Diana Gabaldon, 850, read',
+               'Shadow and Bone, Leigh Bardugo, 358, read',
+               'Gyo, Ito Junji, 400, unread',
+               'Shadow & Claw, Gene Wolfe, 413, unread',
+               'Darker Shades of Magic, V.E. Schwab, 400, read',
+               'Sarum, Edward Rutherford, 912, read',
+               'American Gods, Neil Gaiman, 635, unread',
+               'Lirael, Garth Nix, 464, reading',
+               'Sabriel, Garth Nix, 491, read',
+              ]
+
+function createSampleBooks(sampleBooks) {
+    for (let book in sampleBooks) {
+        // * read through book, split @ ', '
+        let splitBook = sampleBooks[book].split(', ');
+        // * assign to title, author, pages, status
+        let title = splitBook[0];
+        let author = splitBook[1];
+        let pages = splitBook[2];
+        let status = splitBook[3];
+        let id = bookID;
+        // * create new Book instance
+        let newBook = new Book(title, author, pages, status, id);
+        // * push to library
+        myLibrary.push(newBook);
+        bookID++;
+    }
+}
+
+// * populate table with samples
+createSampleBooks(sampleBooks);
+displayLibrary(myLibrary);
+
+
+
 // -------------------- FORM VALIDATION -------------------- //
 
 
@@ -149,7 +187,7 @@ function radioChecked(button) {
 
 function updateCustomError(input) {
     if ((input[type='radio']) || (input.checkValidity() === true) || (input.validity.valueMissing === true) || ((input.validity.customError === true) && (input.validity.valueMissing === false))) {
-        // *        input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
+    // *       input is radio OR             input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
         removeErrorMsg(input);
     }
     
@@ -212,44 +250,6 @@ radioButtons.forEach(targetButton => targetButton.addEventListener('change', () 
 
 
 
-// -------------------- ADD SAMPLE BOOKS -------------------- //
-
-sampleBooks = ['Dune, Frank Herbert, 685, read',
-               'Outlander, Diana Gabaldon, 850, read',
-               'Shadow and Bone, Leigh Bardugo, 358, read',
-               'Gyo, Ito Junji, 400, unread',
-               'Shadow & Claw, Gene Wolfe, 413, unread',
-               'Darker Shades of Magic, V.E. Schwab, 400, read',
-               'Sarum, Edward Rutherford, 912, read',
-               'American Gods, Neil Gaiman, 635, unread',
-               'Lirael, Garth Nix, 464, reading',
-               'Sabriel, Garth Nix, 491, read',
-              ]
-
-function createSampleBooks(sampleBooks) {
-    for (let book in sampleBooks) {
-        // * read through book, split @ ', '
-        let splitBook = sampleBooks[book].split(', ');
-        // * assign to title, author, pages, status
-        let title = splitBook[0];
-        let author = splitBook[1];
-        let pages = splitBook[2];
-        let status = splitBook[3];
-        let id = bookID;
-        // * create new Book instance
-        let newBook = new Book(title, author, pages, status, id);
-        // * push to library
-        myLibrary.push(newBook);
-        bookID++;
-    }
-}
-
-// * populate table with samples
-createSampleBooks(sampleBooks);
-displayLibrary(myLibrary);
-
-
-
 // -------------------- BUTTON FUNCTIONALITY -------------------- //
 
 let add = document.getElementById('add');
@@ -269,7 +269,6 @@ add.addEventListener('click', () => {
 confirm.addEventListener('click', () => {
     let popupForm = document.querySelector('form');
     getRadioButtons();
-    console.log(radioButtons.some(radioChecked));
     // ! console.log(popupForm.checkValidity());
     
     if ((popupForm.checkValidity() === true) && (radioButtons.some(radioChecked) === true)) {
@@ -289,3 +288,68 @@ cancel.addEventListener('click', () => {
     scrubErrors();
     popup.classList.remove('show');
 });
+
+
+
+// -------------------- STATS BAR -------------------- //
+
+let rows = Array.from(document.querySelectorAll('tbody tr'));
+let totalBooks = document.getElementById('num-books');
+let booksRead = document.getElementById('books-read');
+let pagesRead = document.getElementById('pages-read');
+
+function getTotalBooks() {
+    let numBooks = rows.length;
+    return numBooks;
+}
+
+function getBooksRead() {
+    let read = rows.filter(checkRead);
+    let numRead = read.length;
+    return numRead;
+}
+
+function checkRead(row) {
+    let status = row.childNodes[3];
+    return status.textContent === 'read';
+}
+
+function getPagesRead() {
+    let numPages = 0;
+    for (let row in rows) {
+        let status = rows[row].childNodes[3].textContent;
+        if (status === 'read') {
+            let pages = parseInt(rows[row].childNodes[2].textContent);
+            numPages += pages;
+        }
+    }
+    return numPages;
+}
+
+// * sets stat display for each
+let numBooks = getTotalBooks();
+totalBooks.textContent = numBooks;
+
+let numRead = getBooksRead();
+booksRead.textContent = numRead;
+
+let numPages = getPagesRead();
+pagesRead.textContent = numPages;
+
+
+function updateStats() {
+    rows = Array.from(document.querySelectorAll('tbody tr'));
+
+    let numBooks = getTotalBooks();
+    totalBooks.textContent = numBooks;
+
+    let numRead = getBooksRead();
+    booksRead.textContent = numRead;
+
+    let numPages = getPagesRead();
+    pagesRead.textContent = numPages;
+};
+
+const config = {childList: true};
+const observer = new MutationObserver(updateStats);
+observer.observe(table, config);
