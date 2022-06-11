@@ -187,7 +187,7 @@ function radioChecked(button) {
 
 function updateCustomError(input) {
     if ((input[type='radio']) || (input.checkValidity() === true) || (input.validity.valueMissing === true) || ((input.validity.customError === true) && (input.validity.valueMissing === false))) {
-        // *        input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
+    // *       input is radio OR             input is valid       OR                   input is blank       OR     (input has old "blank" error       AND             input is not blank)
         removeErrorMsg(input);
     }
     
@@ -293,15 +293,10 @@ cancel.addEventListener('click', () => {
 
 // -------------------- STATS BAR -------------------- //
 
-let statsBoxes = document.querySelectorAll('div.stats-box');
 let rows = Array.from(document.querySelectorAll('tbody tr'));
 let totalBooks = document.getElementById('num-books');
 let booksRead = document.getElementById('books-read');
 let pagesRead = document.getElementById('pages-read');
-// console.log(statsBoxes);
-// console.log(totalBooks);
-// console.log(booksRead);
-// console.log(pagesRead);
 
 function getTotalBooks() {
     let numBooks = rows.length;
@@ -331,8 +326,7 @@ function getPagesRead() {
     return numPages;
 }
 
-// set stat display for each
-// set event listener for table change
+// * sets stat display for each
 let numBooks = getTotalBooks();
 totalBooks.textContent = numBooks;
 
@@ -342,8 +336,20 @@ booksRead.textContent = numRead;
 let numPages = getPagesRead();
 pagesRead.textContent = numPages;
 
-function updateStat(statBox, data) {
-    // update statBox textContent with data
-    // if confirm, add book data
-    // if delete, remove book data
-}
+
+function updateStats() {
+    rows = Array.from(document.querySelectorAll('tbody tr'));
+
+    let numBooks = getTotalBooks();
+    totalBooks.textContent = numBooks;
+
+    let numRead = getBooksRead();
+    booksRead.textContent = numRead;
+
+    let numPages = getPagesRead();
+    pagesRead.textContent = numPages;
+};
+
+const config = {childList: true};
+const observer = new MutationObserver(updateStats);
+observer.observe(table, config);
