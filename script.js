@@ -33,12 +33,12 @@ function addBook() {
 let table = document.querySelector('tbody');
 
 function displayLibrary(myLibrary) {
-    let tableEnd = document.createElement('div');
-    table.appendChild(tableEnd)
+    // let tableEnd = document.createElement('div');
+    // table.appendChild(tableEnd)
     for (let book in myLibrary) {
         let row = document.createElement('tr');
-        // table.appendChild(row);
-        table.insertBefore(row, tableEnd);
+        table.appendChild(row);
+        // table.insertBefore(row, tableEnd);
         for (let i = 0; i < 5; i++) {
             let cell = document.createElement('td');
             row.appendChild(cell);
@@ -387,7 +387,6 @@ function sortTable() {
         // update table rows
         let rows = table.rows;
         let lastRow = rows[rows.length - 1].nextSibling;
-        console.log({lastRow});
 
         // if button sorts by book INFO...
         if (infoSort.includes(currButton.id)) {
@@ -425,46 +424,9 @@ function sortTable() {
                 switching = true;
             }
 
+        // if button sorts by book STATUS...
         } else if (statSort.includes(currButton.id)) {
-            // set status bundle refs
-            switch (currButton.id) {
-                case 'srt-unread':
-                    bundle = ['unread', 'reading', 'read'];
-                    break;
-                case 'srt-reading':
-                    bundle = ['reading', 'unread', 'read'];
-                    break;
-                case 'srt-read':
-                    bundle = ['read', 'reading', 'unread'];
-            }
-            console.log(bundle);
-
-            // run through status bundle refs (backwards)...
-            for (j = 0; j < (bundle.length); j++) {
-                // set status ref
-                let statusRef = bundle[j];
-                console.log({statusRef});
-                
-                // run through table rows...
-                for (i = 0; i < (rows.length - 1); i++) {
-                    console.log({i});
-                    // pre-set SHOULD switch to false
-                    shouldSwitch = false;
-                    // set current row/status
-                    let currStatus = rows[i].children[3].textContent;
-                    //// console.log(currRow);
-                    console.log({currStatus});
-                    // if current row status === status ref (from bundle)... ...mark as SHOULD switch
-                    if (currStatus === statusRef) {
-                        shouldSwitch = true;
-                        console.log({shouldSwitch});
-                        // if SHOULD switch... ...move current row before last sibling in table
-                        console.log(rows[i]);
-                        console.log({lastRow});
-                        table.insertBefore(rows[i], lastRow.nextSibling);
-                    }
-                }
-            }
+            
         }
     }
 }
