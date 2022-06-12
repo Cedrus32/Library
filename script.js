@@ -353,3 +353,20 @@ function updateStats() {
 const config = {childList: true};
 const observer = new MutationObserver(updateStats);
 observer.observe(table, config);
+
+
+
+// SORT & FILTER
+let navButtons = document.querySelectorAll('section.sort button');
+console.log(navButtons);
+let lastButton;
+let currButton = document.getElementById('srt-title');
+
+navButtons.forEach(button => button.addEventListener('click', () => {
+    lastButton = currButton;
+    currButton = button;
+    if (lastButton !== currButton) {
+        lastButton.classList.remove('view');
+        currButton.classList.add('view');
+    }
+}))
