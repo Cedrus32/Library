@@ -356,17 +356,67 @@ observer.observe(table, config);
 
 
 
-// SORT & FILTER
+// -------------------- SORT & FILTER -------------------- //
 let navButtons = document.querySelectorAll('section.sort button');
-console.log(navButtons);
 let lastButton;
-let currButton = document.getElementById('srt-title');
+let currButton = undefined;
 
+function sortTable() {
+    let switching = true;
+    let shouldSwitch;
+    let i;
+    while (switching === true) {
+        switching = false;
+        rows = table.rows;
+        for (i = 0; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            let currRow = rows[i];
+            let nextRow = rows[i + 1];
+            switch (currButton.id) {
+                case 'srt-title':
+                    x = currRow.children[0].textContent;
+                    y = nextRow.children[0].textContent;
+                    break
+                case 'srt-author':
+                    x = currRow.children[1].textContent;
+                    y = nextRow.children[1].textContent;
+                    break
+                case 'srt-pages':
+                    x = currRow.children[2].textContent;
+                    y = nextRow.children[2].textContent;
+                    break
+                case 'srt-unread':
+                    console.log('unread');
+                    break
+                case 'srt-reading':
+                    console.log('reading');
+                    break
+                case 'srt-read':
+                    console.log('read');
+            }
+
+            if (x > y) {
+                shouldSwitch = true;
+                break
+            }
+        }
+
+        if (shouldSwitch = true) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+
+// * listens for click on nav buttons
 navButtons.forEach(button => button.addEventListener('click', () => {
     lastButton = currButton;
     currButton = button;
     if (lastButton !== currButton) {
-        lastButton.classList.remove('view');
+        if (lastButton !== undefined) {
+            lastButton.classList.remove('view');
+        }
         currButton.classList.add('view');
+        sortTable();
     }
-}))
+}));
