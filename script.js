@@ -378,7 +378,7 @@ function sortTable() {
     // declare status bundle refs
     let infoSort = ['srt-title', 'srt-author', 'srt-pages'];
     let statSort = ['srt-unread', 'srt-reading', 'srt-read'];
-    let bundle;
+    let statRefs;
 
     // start switching
     while (switching === true) {
@@ -386,7 +386,6 @@ function sortTable() {
         switching = false;
         // update table rows
         let rows = table.rows;
-        let lastRow = rows[rows.length - 1].nextSibling;
 
         // if button sorts by book INFO...
         if (infoSort.includes(currButton.id)) {
@@ -426,7 +425,41 @@ function sortTable() {
 
         // if button sorts by book STATUS...
         } else if (statSort.includes(currButton.id)) {
+            // set status references
+            switch (currButton.id) {
+                case 'srt-unread':
+                    statRefs = ['unread', 'reading', 'read'];
+                    break;
+                case 'srt-reading':
+                    statRefs = ['reading', 'unread', 'read'];
+                    break;
+                case 'srt-read':
+                    statRefs = ['read', 'reading', 'unread'];
+            }
+
+            // create grouped library template
+            let groupedLibrary = myLibrary.reduce((newLib, book) => {
+                // initialize groupings
+                if (!newLib[book.status]) {
+                    newLib[book.status] = [];
+                };
+                // fill groupings
+                newLib[book.status].push(book);
+                
+                return newLib;
+            }, {});
+            // ! console.log(groupedLibrary);
+
+            // * wipe table & redraw based on order of status references
+            clearTable(table);
+            for (j = 0; j < statRefs.length; j++) {
+                let libraryPart = statRefs[j];
+                // ! console.log({libraryPart});
+                displayLibrary(groupedLibrary[libraryPart]);
+            }
             
+            // end switching
+            switching = false;
         }
     }
 }
