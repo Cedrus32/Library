@@ -33,9 +33,12 @@ function addBook() {
 let table = document.querySelector('tbody');
 
 function displayLibrary(myLibrary) {
+    let tableEnd = document.createElement('div');
+    table.appendChild(tableEnd)
     for (let book in myLibrary) {
         let row = document.createElement('tr');
-        table.appendChild(row);
+        // table.appendChild(row);
+        table.insertBefore(row, tableEnd);
         for (let i = 0; i < 5; i++) {
             let cell = document.createElement('td');
             row.appendChild(cell);
@@ -362,48 +365,106 @@ let lastButton;
 let currButton = undefined;
 
 function sortTable() {
+    // declare switch triggers
     let switching = true;
     let shouldSwitch;
-    let i;
+
+    // declare row & stat counters
+    let i; // row counter
+    let j; // status counter (in bundle)
+    let x; // current row content
+    let y; // next row content
+
+    // declare status bundle refs
+    let infoSort = ['srt-title', 'srt-author', 'srt-pages'];
+    let statSort = ['srt-unread', 'srt-reading', 'srt-read'];
+    let bundle;
+
+    // start switching
     while (switching === true) {
+        // pause switch until items SHOULD switch
         switching = false;
-        rows = table.rows;
-        for (i = 0; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            let currRow = rows[i];
-            let nextRow = rows[i + 1];
+        // update table rows
+        let rows = table.rows;
+        let lastRow = rows[rows.length - 1].nextSibling;
+        console.log({lastRow});
+
+        // if button sorts by book INFO...
+        if (infoSort.includes(currButton.id)) {
+            // declare row refs
+            // run through rows in table
+            for (i = 0; i < (rows.length - 1); i++) {
+                // pre-set SHOULD switch to false
+                shouldSwitch = false;
+                // get current/next row
+                let currRow = rows[i];
+                let nextRow = rows[i + 1];
+                // get content of current/next row
+                switch (currButton.id) {
+                    case 'srt-title':
+                        x = currRow.children[0].textContent;
+                        y = nextRow.children[0].textContent;
+                        break;
+                    case 'srt-author':
+                        x = currRow.children[1].textContent;
+                        y = nextRow.children[1].textContent;
+                        break;
+                    case 'srt-pages':
+                        x = currRow.children[2].textContent;
+                        y = nextRow.children[2].textContent;
+                }
+                // if next content < current content... ...mark as SHOULD switch
+                if (x > y) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            // if row marked as SHOULD switch... ...place next row before current row
+            if (shouldSwitch = true) {
+                table.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+
+        } else if (statSort.includes(currButton.id)) {
+            // set status bundle refs
             switch (currButton.id) {
-                case 'srt-title':
-                    x = currRow.children[0].textContent;
-                    y = nextRow.children[0].textContent;
-                    break
-                case 'srt-author':
-                    x = currRow.children[1].textContent;
-                    y = nextRow.children[1].textContent;
-                    break
-                case 'srt-pages':
-                    x = currRow.children[2].textContent;
-                    y = nextRow.children[2].textContent;
-                    break
                 case 'srt-unread':
-                    console.log('unread');
-                    break
+                    bundle = ['unread', 'reading', 'read'];
+                    break;
                 case 'srt-reading':
-                    console.log('reading');
-                    break
+                    bundle = ['reading', 'unread', 'read'];
+                    break;
                 case 'srt-read':
-                    console.log('read');
+                    bundle = ['read', 'reading', 'unread'];
             }
+            console.log(bundle);
 
-            if (x > y) {
-                shouldSwitch = true;
-                break
+            // run through status bundle refs (backwards)...
+            for (j = 0; j < (bundle.length); j++) {
+                // set status ref
+                let statusRef = bundle[j];
+                console.log({statusRef});
+                
+                // run through table rows...
+                for (i = 0; i < (rows.length - 1); i++) {
+                    console.log({i});
+                    // pre-set SHOULD switch to false
+                    shouldSwitch = false;
+                    // set current row/status
+                    let currStatus = rows[i].children[3].textContent;
+                    //// console.log(currRow);
+                    console.log({currStatus});
+                    // if current row status === status ref (from bundle)... ...mark as SHOULD switch
+                    if (currStatus === statusRef) {
+                        shouldSwitch = true;
+                        console.log({shouldSwitch});
+                        // if SHOULD switch... ...move current row before last sibling in table
+                        console.log(rows[i]);
+                        console.log({lastRow});
+                        table.insertBefore(rows[i], lastRow.nextSibling);
+                    }
+                }
             }
-        }
-
-        if (shouldSwitch = true) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
         }
     }
 }
