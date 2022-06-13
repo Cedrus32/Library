@@ -364,105 +364,172 @@ let navButtons = document.querySelectorAll('section.sort button');
 let lastButton;
 let currButton = undefined;
 
+let infoSort = ['srt-title', 'srt-author', 'srt-pages'];
+let statSort = ['srt-unread', 'srt-reading', 'srt-read'];
+let statRefs;
+
+let sortingTable;
+let sortingGroups;
+let shouldSortTable;
+let shouldSortGroup;
+let x; // current row content
+let y; // next row content
+let r; // row counter
+let a; // current row status
+let b; // next row status
+// let j = 0; // status group counter
+
 function sortTable() {
-    // declare switch triggers
-    let switching = true;
-    let shouldSwitch;
+    // set sorting to true
+    sortingTable = true
 
-    // declare row & stat counters
-    let i; // row counter
-    let j; // status counter (in bundle)
-    let x; // current row content
-    let y; // next row content
+    // start sorting
+    while (sortingTable === true) {
+        // pause sorting as way to break out of loop
+        sortingTable = false;
 
-    // declare status bundle refs
-    let infoSort = ['srt-title', 'srt-author', 'srt-pages'];
-    let statSort = ['srt-unread', 'srt-reading', 'srt-read'];
-    let statRefs;
-
-    // start switching
-    while (switching === true) {
-        // pause switch until items SHOULD switch
-        switching = false;
-        // update table rows
-        let rows = table.rows;
-
-        // if button sorts by book INFO...
+        // * enacts sorting functions
         if (infoSort.includes(currButton.id)) {
-            // declare row refs
-            // run through rows in table
-            for (i = 0; i < (rows.length - 1); i++) {
-                // pre-set SHOULD switch to false
-                shouldSwitch = false;
-                // get current/next row
-                let currRow = rows[i];
-                let nextRow = rows[i + 1];
-                // get content of current/next row
-                switch (currButton.id) {
-                    case 'srt-title':
-                        x = currRow.children[0].textContent;
-                        y = nextRow.children[0].textContent;
-                        break;
-                    case 'srt-author':
-                        x = currRow.children[1].textContent;
-                        y = nextRow.children[1].textContent;
-                        break;
-                    case 'srt-pages':
-                        x = currRow.children[2].textContent;
-                        y = nextRow.children[2].textContent;
-                }
-                // if next content < current content... ...mark as SHOULD switch
-                if (x > y) {
-                    shouldSwitch = true;
-                    break;
-                }
-            }
-            // if row marked as SHOULD switch... ...place next row before current row
-            if (shouldSwitch = true) {
-                table.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-
-        // if button sorts by book STATUS...
+            table = document.querySelector('tbody');
+            let rows = table.rows;
+            sortByInfo(rows);
         } else if (statSort.includes(currButton.id)) {
-            // set status references
-            switch (currButton.id) {
-                case 'srt-unread':
-                    statRefs = ['unread', 'reading', 'read'];
-                    break;
-                case 'srt-reading':
-                    statRefs = ['reading', 'unread', 'read'];
-                    break;
-                case 'srt-read':
-                    statRefs = ['read', 'reading', 'unread'];
-            }
-
-            // create grouped library template
-            let groupedLibrary = myLibrary.reduce((newLib, book) => {
-                // initialize groupings
-                if (!newLib[book.status]) {
-                    newLib[book.status] = [];
-                };
-                // fill groupings
-                newLib[book.status].push(book);
-                
-                return newLib;
-            }, {});
-            // ! console.log(groupedLibrary);
-
-            // * wipe table & redraw based on order of status references
-            clearTable(table);
-            for (j = 0; j < statRefs.length; j++) {
-                let libraryPart = statRefs[j];
-                // ! console.log({libraryPart});
-                displayLibrary(groupedLibrary[libraryPart]);
-            }
-            
-            // end switching
-            switching = false;
+            sortByStatus();
         }
     }
 }
+
+function sortByInfo(rows) {
+    for (r = 0; r < (rows.length - 1); r++) {
+        shouldSortTable = false;
+
+        let currRow = rows[r];
+        let nextRow = rows[r + 1];
+        switch (currButton.id) {
+            case 'srt-title':
+                x = currRow.children[0].textContent;
+                y = nextRow.children[0].textContent;
+                break;
+            case 'srt-author':
+                x = currRow.children[1].textContent;
+                y = nextRow.children[1].textContent;
+                break;
+            case 'srt-pages':
+                x = currRow.children[2].textContent;
+                y = nextRow.children[2].textContent;
+        }
+
+        // if next content < current content... ...mark as SHOULD sort
+        if (x > y) {
+            shouldSortTable = true;
+            break;
+        }
+    }
+    // if row marked as SHOULD sort... ...place next row before current row
+    if (shouldSortTable === true) {
+        table.insertBefore(rows[r + 1], rows[r]);
+        sortingTable = true;
+    }
+}
+
+function sortByStatus() {
+    // set status references
+    switch (currButton.id) {
+        case 'srt-unread':
+            statRefs = ['unread', 'reading', 'read'];
+            break;
+        case 'srt-reading':
+            statRefs = ['reading', 'unread', 'read'];
+            break;
+        case 'srt-read':
+            statRefs = ['read', 'reading', 'unread'];
+    }
+
+    // create grouped library template
+    let groupedLibrary = myLibrary.reduce((newLib, book) => {
+        // initialize groupings
+        if (!newLib[book.status]) {
+            newLib[book.status] = [];
+        };
+        // fill groupings
+        newLib[book.status].push(book);
+        
+        return newLib;
+    }, {});
+
+    // * wipes table & redraws based on order of status references
+    clearTable(table);
+    for (j = 0; j < 3; j++) {
+        let key = statRefs[j];
+        // ! console.log({libraryPart});
+        displayLibrary(groupedLibrary[key]);
+    }
+
+    // set sorting to true
+    sortingGroups = true;
+    // reset stat counter
+    j = 0;
+
+    // start sorting
+    while (sortingGroups === true) {
+        // pause sorting as way to break out of loop
+        sortingGroups = false;
+
+        table = document.querySelector('tbody');
+        let rows = table.rows;
+
+        // *enact sorting function
+        sortInGroups(rows);
+    }
+}
+
+function sortInGroups(rows) {
+    let currGroup;
+
+    for (r = 0; r < (rows.length - 1); r++) {
+        shouldSortGroup = false;
+        currGroup = statRefs[j];
+
+        let currRow = rows[r];
+        let nextRow = rows[r + 1];
+        x = currRow.children[0].textContent;
+        y = nextRow.children[0].textContent;
+        a = currRow.children[3].textContent;
+        b = nextRow.children[3].textContent;
+        
+        // if row in same group AND next content < current content... ...mark as SHOULD sort
+        if ((a === currGroup) && (b === currGroup) && (x > y)) {
+            // console.log('SHOULD SORT');
+            shouldSortGroup = true;
+            break;
+        }
+
+        if (r === (rows.length - 2)) {
+            j++;
+            if (j < 3) {
+                sortingGroups = true;
+                r = -1;
+            }
+        }
+    } 
+    // if row marked as SHOULD sort... ...place next row before current row
+    if (shouldSortGroup === true) {
+        table.insertBefore(rows[r + 1], rows[r]);
+        sortingGroups = true;
+    }
+}
+
+// function sortInGroups(rows) {
+//     for (r = 0; r < (rows.length -1); r++) {
+//         shouldSortGroup = false;
+
+//         let currRow = rows[r];
+//         let nextRow = rows[r + 1];
+//         x = currRow.children[0].textContent;
+//         y = nextRow.children[0].textContent;
+//         b = nextRow.children[3].textContent;
+//     }
+// }
 
 // * listens for click on nav buttons
 navButtons.forEach(button => button.addEventListener('click', () => {
