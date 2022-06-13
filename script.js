@@ -33,12 +33,9 @@ function addBook() {
 let table = document.querySelector('tbody');
 
 function displayLibrary(myLibrary) {
-    // let tableEnd = document.createElement('div');
-    // table.appendChild(tableEnd)
     for (let book in myLibrary) {
         let row = document.createElement('tr');
         table.appendChild(row);
-        // table.insertBefore(row, tableEnd);
         for (let i = 0; i < 5; i++) {
             let cell = document.createElement('td');
             row.appendChild(cell);
@@ -124,23 +121,23 @@ sampleBooks = ['Dune, Frank Herbert, 685, read',
 
 function createSampleBooks(sampleBooks) {
     for (let book in sampleBooks) {
-        // * read through book, split @ ', '
+        // read through book, split @ ', '
         let splitBook = sampleBooks[book].split(', ');
-        // * assign to title, author, pages, status
+        // assign to title, author, pages, status
         let title = splitBook[0];
         let author = splitBook[1];
         let pages = splitBook[2];
         let status = splitBook[3];
         let id = bookID;
-        // * create new Book instance
+        // create new Book instance
         let newBook = new Book(title, author, pages, status, id);
-        // * push to library
+        // push to library
         myLibrary.push(newBook);
         bookID++;
     }
 }
 
-// * populate table with samples
+// * populates table with samples
 createSampleBooks(sampleBooks);
 displayLibrary(myLibrary);
 
@@ -166,7 +163,7 @@ function throwMissingValueError() {
     getInputBoxes();
     getRadioButtons();
 
-    // * check text boxes
+    // check text boxes
     for (targetInput in inputBoxes) {
         let input = inputBoxes[targetInput];
         if (input.validity.customError === false) {
@@ -176,7 +173,7 @@ function throwMissingValueError() {
         }
     }
 
-    // * check radio buttons
+    // check radio buttons
     if (radioButtons[0].validity.customError === false) {
         if (radioButtons.some(radioChecked) === false) {
             generateErrorMsg(radioButtons[0]);
@@ -329,18 +326,8 @@ function getPagesRead() {
     return numPages;
 }
 
-// * sets stat display for each
-let numBooks = getTotalBooks();
-totalBooks.textContent = numBooks;
-
-let numRead = getBooksRead();
-booksRead.textContent = numRead;
-
-let numPages = getPagesRead();
-pagesRead.textContent = numPages;
-
-
 function updateStats() {
+    console.log('enter updateStats');
     rows = Array.from(document.querySelectorAll('tbody tr'));
 
     let numBooks = getTotalBooks();
@@ -353,6 +340,17 @@ function updateStats() {
     pagesRead.textContent = numPages;
 };
 
+// * sets stat display for each
+let numBooks = getTotalBooks();
+totalBooks.textContent = numBooks;
+
+let numRead = getBooksRead();
+booksRead.textContent = numRead;
+
+let numPages = getPagesRead();
+pagesRead.textContent = numPages;
+
+// * updates stats live on change to table
 const config = {childList: true};
 const observer = new MutationObserver(updateStats);
 observer.observe(table, config);
@@ -372,12 +370,9 @@ let sortingTable;
 let sortingGroups;
 let shouldSortTable;
 let shouldSortGroup;
-let x; // current row content
-let y; // next row content
-let r; // row counter
-let a; // current row status
-let b; // next row status
-// let j = 0; // status group counter
+
+let r;
+let j;
 
 function sortTable() {
     // set sorting to true
@@ -405,6 +400,9 @@ function sortByInfo(rows) {
 
         let currRow = rows[r];
         let nextRow = rows[r + 1];
+        let x;
+        let y;
+
         switch (currButton.id) {
             case 'srt-title':
                 x = currRow.children[0].textContent;
@@ -457,8 +455,10 @@ function sortByStatus() {
         return newLib;
     }, {});
 
-    // * wipes table & redraws based on order of status references
+    // * wipes table
     clearTable(table);
+
+    // * redraws table based on order of status references
     for (j = 0; j < 3; j++) {
         let key = statRefs[j];
         // ! console.log({libraryPart});
@@ -477,21 +477,26 @@ function sortByStatus() {
 
         table = document.querySelector('tbody');
         let rows = table.rows;
+        let currRow;
+        let nextRow;
+        let currGroup;
 
-        // *enact sorting function
+        let x;
+        let y;
+        let a;
+        let b;
+
         sortInGroups(rows);
     }
 }
 
 function sortInGroups(rows) {
-    let currGroup;
-
     for (r = 0; r < (rows.length - 1); r++) {
         shouldSortGroup = false;
         currGroup = statRefs[j];
 
-        let currRow = rows[r];
-        let nextRow = rows[r + 1];
+        currRow = rows[r];
+        nextRow = rows[r + 1];
         x = currRow.children[0].textContent;
         y = nextRow.children[0].textContent;
         a = currRow.children[3].textContent;
@@ -504,6 +509,7 @@ function sortInGroups(rows) {
             break;
         }
 
+        // increase j (change status ref) when r at bottom of table
         if (r === (rows.length - 2)) {
             j++;
             if (j < 3) {
@@ -518,18 +524,6 @@ function sortInGroups(rows) {
         sortingGroups = true;
     }
 }
-
-// function sortInGroups(rows) {
-//     for (r = 0; r < (rows.length -1); r++) {
-//         shouldSortGroup = false;
-
-//         let currRow = rows[r];
-//         let nextRow = rows[r + 1];
-//         x = currRow.children[0].textContent;
-//         y = nextRow.children[0].textContent;
-//         b = nextRow.children[3].textContent;
-//     }
-// }
 
 // * listens for click on nav buttons
 navButtons.forEach(button => button.addEventListener('click', () => {
