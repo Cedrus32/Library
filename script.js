@@ -107,6 +107,8 @@ function setRemoveListener(icon) {
         deleteRow(icon);
         deleteData(delBookID);
         // ! console.log(myLibrary);
+
+        checkStats();
     });
 }
 
@@ -291,6 +293,8 @@ confirm.addEventListener('click', () => {
     } else {
         throwMissingValueError();
     }
+
+    checkStats();
 });
 
 // * cancels input
@@ -311,6 +315,9 @@ let totalBooks = document.getElementById('num-books');
 let booksRead = document.getElementById('books-read');
 let pagesRead = document.getElementById('pages-read');
 
+let currLength = table.children.length;
+let prevLength;
+
 function getTotalBooks() {
     let numBooks = rows.length;
     return numBooks;
@@ -322,8 +329,8 @@ function getBooksRead() {
     return numRead;
 }
 
-function checkRead(row) {
-    let status = row.childNodes[3];
+function checkRead(mutRow) {
+    let status = mutRow.childNodes[3];
     return status.textContent === 'read';
 }
 
@@ -339,16 +346,6 @@ function getPagesRead() {
     return numPages;
 }
 
-// * sets stat display for each
-let numBooks = getTotalBooks();
-totalBooks.textContent = numBooks;
-
-let numRead = getBooksRead();
-booksRead.textContent = numRead;
-
-let numPages = getPagesRead();
-pagesRead.textContent = numPages;
-
 function updateStats() {
     rows = Array.from(document.querySelectorAll('tbody tr'));
 
@@ -362,11 +359,27 @@ function updateStats() {
     pagesRead.textContent = numPages;
 }
 
-// * updates stats live on change to table
-const config = {childList: true};
-const observer = new MutationObserver(updateStats);
-observer.observe(table, config);
+function checkStats() {
+    prevLength = currLength;
+    currLength = table.children.length;
 
+    if (currLength !== prevLength) {
+        console.log('table was changed');
+        updateStats();
+    }
+}
+
+// * sets stat display for each
+let numBooks = getTotalBooks();
+totalBooks.textContent = numBooks;
+
+let numRead = getBooksRead();
+booksRead.textContent = numRead;
+
+let numPages = getPagesRead();
+pagesRead.textContent = numPages;
+
+// * live stat check in confirm/remove eventListeners ^^^
 
 
 // ------------------------------------------------------- //
