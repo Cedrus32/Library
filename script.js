@@ -107,7 +107,7 @@ function setRemoveListener(icon) {
         deleteRow(icon);
         deleteData(delBookID);
         // ! console.log(myLibrary);
-    })
+    });
 }
 
 
@@ -130,23 +130,23 @@ sampleBooks = ['Dune, Frank Herbert, 685, read',
 
 function createSampleBooks(sampleBooks) {
     for (let book in sampleBooks) {
-        // read through book, split @ ', '
+        // * read through book, split @ ', '
         let splitBook = sampleBooks[book].split(', ');
-        // assign to title, author, pages, status
+        // * assign to title, author, pages, status
         let title = splitBook[0];
         let author = splitBook[1];
         let pages = splitBook[2];
         let status = splitBook[3];
         let id = bookID;
-        // create new Book instance
+        // * create new Book instance
         let newBook = new Book(title, author, pages, status, id);
-        // push to library
+        // * push to library
         myLibrary.push(newBook);
         bookID++;
     }
 }
 
-// * populates table with samples
+// * populate table with samples
 createSampleBooks(sampleBooks);
 displayLibrary(myLibrary);
 
@@ -173,7 +173,7 @@ function throwMissingValueError() {
     getInputBoxes();
     getRadioButtons();
 
-    // check text boxes
+    // * check text boxes
     for (targetInput in inputBoxes) {
         let input = inputBoxes[targetInput];
         if (input.validity.customError === false) {
@@ -183,7 +183,7 @@ function throwMissingValueError() {
         }
     }
 
-    // check radio buttons
+    // * check radio buttons
     if (radioButtons[0].validity.customError === false) {
         if (radioButtons.some(radioChecked) === false) {
             generateErrorMsg(radioButtons[0]);
