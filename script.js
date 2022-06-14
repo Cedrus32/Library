@@ -1,4 +1,7 @@
+// -------------------------------------------------------- //
 // -------------------- BOOK FUNCTIONS -------------------- //
+// -------------------------------------------------------- //
+
 let myLibrary = [];
 
 function Book(bookTitle, bookAuthor, bookPages, bookStatus, bookID) {
@@ -28,7 +31,9 @@ function addBook() {
 
 
 
+// ----------------------------------------------------- //
 // -------------------- ADD/REFRESH -------------------- //
+// ----------------------------------------------------- //
 
 let table = document.querySelector('tbody');
 
@@ -77,7 +82,9 @@ function refreshDisplay() {
 
 
 
+// -------------------------------------------------------- //
 // -------------------- DELETE/REFRESH -------------------- //
+// -------------------------------------------------------- //
 
 function deleteRow(icon) {
     let parentRow = icon.parentElement.parentElement;
@@ -105,7 +112,9 @@ function setRemoveListener(icon) {
 
 
 
+// ---------------------------------------------------------- //
 // -------------------- ADD SAMPLE BOOKS -------------------- //
+// ---------------------------------------------------------- //
 
 sampleBooks = ['Dune, Frank Herbert, 685, read',
                'Outlander, Diana Gabaldon, 850, read',
@@ -143,8 +152,9 @@ displayLibrary(myLibrary);
 
 
 
+// --------------------------------------------------------- //
 // -------------------- FORM VALIDATION -------------------- //
-
+// --------------------------------------------------------- //
 
 let inputBoxes = document.querySelectorAll('input[type="text"]');
 let radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -249,8 +259,9 @@ radioButtons.forEach(targetButton => targetButton.addEventListener('change', () 
 }));
 
 
-
+// -------------------------------------------------------------- //
 // -------------------- BUTTON FUNCTIONALITY -------------------- //
+// -------------------------------------------------------------- //
 
 let add = document.getElementById('add');
 let popup = document.querySelector('.popup');
@@ -291,7 +302,9 @@ cancel.addEventListener('click', () => {
 
 
 
+// --------------------------------------------------- //
 // -------------------- STATS BAR -------------------- //
+// --------------------------------------------------- //
 
 let rows = Array.from(document.querySelectorAll('tbody tr'));
 let totalBooks = document.getElementById('num-books');
@@ -326,20 +339,6 @@ function getPagesRead() {
     return numPages;
 }
 
-function updateStats() {
-    console.log('enter updateStats');
-    rows = Array.from(document.querySelectorAll('tbody tr'));
-
-    let numBooks = getTotalBooks();
-    totalBooks.textContent = numBooks;
-
-    let numRead = getBooksRead();
-    booksRead.textContent = numRead;
-
-    let numPages = getPagesRead();
-    pagesRead.textContent = numPages;
-};
-
 // * sets stat display for each
 let numBooks = getTotalBooks();
 totalBooks.textContent = numBooks;
@@ -350,6 +349,19 @@ booksRead.textContent = numRead;
 let numPages = getPagesRead();
 pagesRead.textContent = numPages;
 
+function updateStats() {
+    rows = Array.from(document.querySelectorAll('tbody tr'));
+
+    let numBooks = getTotalBooks();
+    totalBooks.textContent = numBooks;
+
+    let numRead = getBooksRead();
+    booksRead.textContent = numRead;
+
+    let numPages = getPagesRead();
+    pagesRead.textContent = numPages;
+}
+
 // * updates stats live on change to table
 const config = {childList: true};
 const observer = new MutationObserver(updateStats);
@@ -357,7 +369,10 @@ observer.observe(table, config);
 
 
 
+// ------------------------------------------------------- //
 // -------------------- SORT & FILTER -------------------- //
+// ------------------------------------------------------- //
+
 let navButtons = document.querySelectorAll('section.sort button');
 let lastButton;
 let currButton = undefined;
