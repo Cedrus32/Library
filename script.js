@@ -302,14 +302,13 @@ confirm.addEventListener('click', () => {
         addBook();
         // ! console.log(myLibrary);
 
-        refreshDisplay();
-        // todo catch current sort view
-        console.log({currButton});
-        // todo sort table
-        sortTable();
-
         popup.classList.remove('show');
         form.reset();
+
+        refreshDisplay();
+        if (currButton !== undefined) {
+            sortTable();
+        }
     } else {
         throwMissingValueError();
     }
