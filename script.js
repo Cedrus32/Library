@@ -427,6 +427,8 @@ let r;
 let j;
 
 function sortTable() {
+    console.log({myLibrary});
+
     // set sorting to true
     sortingTable = true
 
@@ -465,8 +467,8 @@ function sortByInfo(rows) {
                 y = nextRow.children[1].textContent.toLowerCase();
                 break;
             case 'srt-pages':
-                x = currRow.children[2].textContent.toLowerCase();
-                y = nextRow.children[2].textContent.toLowerCase();
+                x = parseInt(currRow.children[2].textContent);
+                y = parseInt(nextRow.children[2].textContent);
         }
 
         // if next content < current content... ...mark as SHOULD sort
