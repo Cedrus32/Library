@@ -6,12 +6,38 @@
 
 let myLibrary = [];
 
-function Book(bookTitle, bookAuthor, bookPages, bookStatus, bookID) {
-    this.title = bookTitle;
-    this.author = bookAuthor;
-    this.pages = bookPages;
-    this.status = bookStatus;
-    this.id = bookID;
+// function Book(bookTitle, bookAuthor, bookPages, bookStatus, bookID) {
+//     this.title = bookTitle;
+//     this.author = bookAuthor;
+//     this.pages = bookPages;
+//     this.status = bookStatus;
+//     this.id = bookID;
+// }
+
+class Book {
+    constructor (bookTitle, bookAuthor, bookPages, bookStatus, bookID) {
+        this.title = bookTitle;
+        this.author = bookAuthor;
+        this.pages = bookPages;
+        this.status = bookStatus;
+        this.id = bookID;
+    }
+
+    // get title() {
+    //     return this.title;
+    // };
+    // get author() {
+    //     return this.author;
+    // };
+    // get pages() {
+    //     return this.pages;
+    // };
+    // get status() {
+    //     return this.status;
+    // };
+    // get id() {
+    //     return this.id;
+    // };
 }
 
 let bookID = 0;
