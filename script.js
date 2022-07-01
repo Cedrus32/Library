@@ -6,14 +6,6 @@
 
 let myLibrary = [];
 
-// function Book(bookTitle, bookAuthor, bookPages, bookStatus, bookID) {
-//     this.title = bookTitle;
-//     this.author = bookAuthor;
-//     this.pages = bookPages;
-//     this.status = bookStatus;
-//     this.id = bookID;
-// }
-
 class Book {
     constructor (bookTitle, bookAuthor, bookPages, bookStatus, bookID) {
         this.title = bookTitle;
@@ -22,22 +14,6 @@ class Book {
         this.status = bookStatus;
         this.id = bookID;
     }
-
-    // get title() {
-    //     return this.title;
-    // };
-    // get author() {
-    //     return this.author;
-    // };
-    // get pages() {
-    //     return this.pages;
-    // };
-    // get status() {
-    //     return this.status;
-    // };
-    // get id() {
-    //     return this.id;
-    // };
 }
 
 let bookID = 0;
@@ -108,7 +84,6 @@ function clearTable(table) {
 function refreshDisplay() {
     clearTable(table);
     displayLibrary(myLibrary);
-    // todo sort display -- double sorting if sort by status?
 }
 
 
@@ -577,8 +552,8 @@ function sortInGroups(rows) {
 
         currRow = rows[r];
         nextRow = rows[r + 1];
-        x = currRow.children[0].textContent;
-        y = nextRow.children[0].textContent;
+        x = currRow.children[0].textContent.toLowerCase();
+        y = nextRow.children[0].textContent.toLowerCase();
         a = currRow.children[3].textContent;
         b = nextRow.children[3].textContent;
         
